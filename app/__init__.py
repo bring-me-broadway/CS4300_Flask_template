@@ -13,6 +13,7 @@ socketio = SocketIO()
 app = Flask(__name__)
 app.config.from_object(os.environ["APP_SETTINGS"])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/[YOUR_DATABASE_NAME]'
 
 # DB
 db = SQLAlchemy(app)
