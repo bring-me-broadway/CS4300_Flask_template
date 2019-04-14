@@ -4,36 +4,44 @@
         <link rel="stylesheet" href="/static/main.css">
     </head>
     <body>
-        <div class="topcorner">
+        <!-- <div class="topcorner">
             <p>Project Name: {{ name }}</p>
             <p>cool ppl: {{ netid }}</p>
-        </div>
-        <form class="form-inline global-search">
-            <h1 style="font-size: 55px; font-family:Futura; color: #4285F4">
-                C
-                <font color=#EA4335>S</font>
-                <font color=#FBBC05>4</font>
-                3
-                <font color=#34A853>0</font>
-                <font color=#EA4335>0</font>
+        </div> -->
+
+        <!-- HEADER  -->
+        <header>
+            <h1 class='title'>
+                {{ name }}
             </h1>
-            
-            <br><br>
-            
-            <div class="form-group">
-                <input id="input" type="text" name="search" class="form-control" placeholder="Your Input">
-            </div>
-            <button type="submit" class="btn btn-info"> Go! </button>
-        </form>
-        <form class="form-inline global-search">
-        {% if data %}
-            <h1>{{output_message}}</h1>
-            {% for d in data %}  
-                <br>
-                <p>{{d}}</p>
-            {% endfor %}
-        {% endif %}
-        </form>
+            <h4 class='subheader'>
+                {{ netid }}
+            </h4>
+        </header>
+        
+        <!-- BODY CONTENT -->
+        <div class='content'>
+            <!-- input -->
+            <form class="form-inline global-search">
+                <div class="form-group">
+                    <input id="input" type="text" name="search" class="form-control" placeholder="Your Input">
+                </div>
+                <button type="submit" class="btn btn-info"> BRING IT! </button>
+            </form>
+
+            <!-- output -->
+            <form class="form-inline global-search">
+            {% if data %}
+                <h1>{{output_message}}</h1>
+                {% for d in data %}  
+                    <br>
+                    <p>{{d}}</p>
+                {% endfor %}
+            {% endif %}
+            </form>
+
+        </div>
+        
     </body>
 
 </html>
