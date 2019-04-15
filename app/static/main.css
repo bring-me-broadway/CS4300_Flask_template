@@ -51,6 +51,14 @@ header {
     padding:5%;
 }
 
+.output-msg {
+    font-family:ennio;
+}
+.output-list {
+    font-size: 205%;
+    font-family: robotoCondensed;
+}
+
 
 /** end steph **/
 
