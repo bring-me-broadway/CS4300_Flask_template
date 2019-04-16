@@ -1,0 +1,33 @@
+<!-- in progress, ignore for now --steph -->
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/main.css">
+    </head>
+    <body>
+         <!-- HEADER  -->
+         <header>
+            <h1 class='title'>
+                {{ name }}
+            </h1>
+            <h4 class='subheader'>
+                {{ netid }}
+            </h4>
+         </header>
+            
+            <!-- BODY CONTENT -->
+            <div class='content'>
+                <!-- input -->
+                <div class="form-inline global-search">
+                    <div class="form-group">
+                        <input id="musical-input" type="text" name="search" class="form-control" placeholder="broadway show">
+                    </div>
+                    <button class="btn btn-info" onclick="loadDoc(myFunction)"> 
+                        BRING IT! 
+                    </button>
+                </div>
+    
+            </div>
+    </body>
+
+</html>

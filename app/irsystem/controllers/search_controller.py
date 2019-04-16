@@ -1,6 +1,7 @@
 from . import *  
 from app.irsystem.models.helpers import *
 from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
+import re
 
 project_name = "BRING ME BROADWAY"
 net_id = "Nainika D'Souza (nmd65), Julie Phan (jp2254), Brooke Greenstein (bdg74), Arjun Chattoraj (ac2582), Stephanie Mark (srm276)"
@@ -19,13 +20,19 @@ print(name_to_index)
 index_to_name = dict((k, v.lower()) for k,v in index_to_name.items())
 print(index_to_name)
 
+# https://stackoverflow.com/questions/1549641/how-to-capitalize-the-first-letter-of-each-word-in-a-string-python
+def repl_func(m):
+    """process regular expression match groups for word upper-casing problem"""
+    return m.group(1) + m.group(2).upper()
+# end
+
 @irsystem.route('/', methods=['GET'])
 def search():
 	query = request.args.get('search')
 
 	if not query:
 		data = []
-		output_message = ''
+		query_title = ''
 	else:
 		# lowercase the query
 		musical = query.lower()
@@ -34,11 +41,14 @@ def search():
 		sorted_i = np.argsort(score_list)[::-1]
 		# print(index_to_name)
 		
-		mus_score_list = [index_to_name[str(i)].title() for i,score in enumerate(score_list)]
-		output_message = musical.title()
+		# musical_title = 
+		# s = re.sub("(^|\s)(\S)", repl_func, s)
+
+		mus_score_list = [ re.sub("(^|\s)(\S)", repl_func, index_to_name[str(i)]) for i,score in enumerate(score_list)]
+		query_title = musical.title()
 		
-		data = np.array(mus_score_list)[sorted_i]
-	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=data)
-
-
-
+		# get results except top result, which is the query
+		data = np.array(mus_score_list)[sorted_i][:10]
+		data = np.delete(data, 0)
+		
+	return render_template('search.html', name=project_name, netid=net_id, query_title=query_title, data=data)

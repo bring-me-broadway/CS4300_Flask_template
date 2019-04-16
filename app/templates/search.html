@@ -4,11 +4,6 @@
         <link rel="stylesheet" href="/static/main.css">
     </head>
     <body>
-        <!-- <div class="topcorner">
-            <p>Project Name: {{ name }}</p>
-            <p>cool ppl: {{ netid }}</p>
-        </div> -->
-
         <!-- HEADER  -->
         <header>
             <h1 class='title'>
@@ -22,26 +17,59 @@
         <!-- BODY CONTENT -->
         <div class='content'>
             <!-- input -->
-            <form class="form-inline global-search">
+            <div class="form-inline global-search">
                 <div class="form-group">
-                    <input id="input" type="text" name="search" class="form-control" placeholder="Your Input">
+                    <input id="musical-input" type="text" name="search" class="form-control" placeholder="broadway show">
                 </div>
-                <button type="submit" class="btn btn-info"> BRING IT! </button>
-            </form>
-
+                <button id="search-btn" class="btn btn-info"> 
+                    BRING IT! 
+                </button>
+            </div>
+        
             <!-- output -->
-            <form class="form-inline global-search">
-                <h2 class='output-msg'>Because you searched for <i>{{output_message}}</i>, you might like:</h2>
-                <div class='output-list'>
-                {% for d in data %}  
-                    <br>
-                    <p>{{d}}</p>
-                {% endfor %}
-                </div>
-            </form>
-
+            <div id='output-container'>
+                <form class="form-inline global-search" id='results'>
+                    <h2 id='output-msg'>
+                        Because you like <i>{{query_title}}</i>, you might also like:
+                    </h2>
+                    <div class='output-list'>
+                    {% for d in data %}  
+                        <br>
+                        <p>{{d}}</p>
+                    {% endfor %}
+                    </div>
+                </form>
+            </div>
         </div>
         
-    </body>
 
+        <!-- jquery -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+        <script type="text/javascript" language="javascript">
+
+            var outputMessage = document.getElementById("output-msg");
+            outputMessage.style.display = 'none';
+            outputMessage.style.fontFamily = 'ennio';
+
+            $('#search-btn').click(function(){
+                console.log('clicked')
+                query = document.getElementById('musical-input').value;
+                if(query) {
+                    // show output message
+                    outputMessage.style.display = 'block';
+
+                    query = encodeURIComponent(query.trim())
+                    console.log(query)
+                    let url = window.location.href + '?search=' + query;
+                    
+                    $('#output-container').load(url + ' #output-container');
+                } else {
+                    outputMessage.style.display = 'none';
+                }
+            });
+
+        </script>
+
+    </body>
 </html>
+

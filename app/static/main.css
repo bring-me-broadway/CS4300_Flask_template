@@ -51,12 +51,14 @@ header {
     padding:5%;
 }
 
-.output-msg {
+#output-msg {
     font-family:ennio;
 }
 .output-list {
     font-size: 205%;
     font-family: robotoCondensed;
+    text-align: left;
+    padding-left: 10%;
 }
 
 
