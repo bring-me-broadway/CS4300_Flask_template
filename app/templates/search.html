@@ -44,7 +44,7 @@
         
 
         <!-- jquery -->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+        <script type="text/javascript" src="../static/jquery-3.4.0.min.js"></script>
         <script type="text/javascript" language="javascript">
 
             var outputMessage = document.getElementById("output-msg");
@@ -65,6 +65,12 @@
                     $('#output-container').load(url + ' #output-container');
                 } else {
                     outputMessage.style.display = 'none';
+                }
+            });
+
+            $('#musical-input').keypress(function(e){
+                if(e.which == 13){//Enter key pressed
+                    $('#search-btn').click();//Trigger search button click event
                 }
             });
 
