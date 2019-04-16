@@ -28,17 +28,16 @@
         
             <!-- output -->
             <div id='output-container'>
-                <form class="form-inline global-search" id='results'>
-                    <h2 id='output-msg'>
+                <div id='results'>
+                    <h2 id='output-msg' class='ennio-font'>
                         Because you like <i>{{query_title}}</i>, you might also like:
                     </h2>
                     <div class='output-list'>
                     {% for d in data %}  
-                        <br>
                         <p>{{d}}</p>
                     {% endfor %}
                     </div>
-                </form>
+                </div>
             </div>
         </div>
         
@@ -51,10 +50,14 @@
             outputMessage.style.display = 'none';
             outputMessage.style.fontFamily = 'ennio';
 
+
             $('#search-btn').click(function(){
                 console.log('clicked')
                 query = document.getElementById('musical-input').value;
                 if(query) {
+                    $( document ).ajaxError(function( event, request, settings ) {
+                        $( "#output-container" ).html( "<p id='error-msg'>We couldn't find '" + decodeURIComponent(query) + "'... check your spelling and try again!</p>" );
+                    });
                     // show output message
                     outputMessage.style.display = 'block';
 
@@ -62,7 +65,7 @@
                     console.log(query)
                     let url = window.location.href + '?search=' + query;
                     
-                    $('#output-container').load(url + ' #output-container');
+                    $('#output-container').load(url + ' #results');
                 } else {
                     outputMessage.style.display = 'none';
                 }

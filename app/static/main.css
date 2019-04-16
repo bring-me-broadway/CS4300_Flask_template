@@ -51,14 +51,23 @@ header {
     padding:5%;
 }
 
-#output-msg {
+#error-msg {
+    font-size: 30px;
+    font-family:ennio;
+}
+
+#output-container {
+    text-align:center;
+}
+
+.ennio-font {
     font-family:ennio;
 }
 .output-list {
     font-size: 205%;
     font-family: robotoCondensed;
     text-align: left;
-    padding-left: 10%;
+    display: inline-block;
 }
 
 

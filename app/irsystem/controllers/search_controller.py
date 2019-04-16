@@ -36,19 +36,17 @@ def search():
 	else:
 		# lowercase the query
 		musical = query.lower()
-		mus_idx = name_to_index[musical]
-		score_list = simmat[mus_idx]
-		sorted_i = np.argsort(score_list)[::-1]
-		# print(index_to_name)
-		
-		# musical_title = 
-		# s = re.sub("(^|\s)(\S)", repl_func, s)
+		if name_to_index[musical]:
+			mus_idx = name_to_index[musical]
+			score_list = simmat[mus_idx]
+			sorted_i = np.argsort(score_list)[::-1]
+			# print(index_to_name)
 
-		mus_score_list = [ re.sub("(^|\s)(\S)", repl_func, index_to_name[str(i)]) for i,score in enumerate(score_list)]
-		query_title = musical.title()
-		
-		# get results except top result, which is the query
-		data = np.array(mus_score_list)[sorted_i][:10]
-		data = np.delete(data, 0)
+			mus_score_list = [ re.sub("(^|\s)(\S)", repl_func, index_to_name[str(i)]) for i,score in enumerate(score_list)]
+			query_title = musical.title()
+			
+			# get results except top result, which is the query
+			data = np.array(mus_score_list)[sorted_i][:10]
+			data = np.delete(data, 0)
 		
 	return render_template('search.html', name=project_name, netid=net_id, query_title=query_title, data=data)
