@@ -7,12 +7,22 @@ import pickle
 project_name = "BRING ME BROADWAY"
 net_id = "Nainika D'Souza (nmd65), Julie Phan (jp2254), Brooke Greenstein (bdg74), Arjun Chattoraj (ac2582), Stephanie Mark (srm276)"
 
-# ranker
-simmat = np.genfromtxt('sim_matrix.csv', delimiter=',')
+# ranker - updated 4/22
+lyrsim = np.genfromtxt('sim_matrix.csv', delimiter=',') # lyrics similarity
 with open('name_to_index.json') as json_file:  
     name_to_index = json.load(json_file)
 with open('index_to_name.json') as json_file:  
     index_to_name = json.load(json_file)
+compsim = np.genfromtxt('composer_sim.csv', delimiter=',') # composer similarity
+descsim = np.genfromtxt('SVM_sim.csv', delimiter=',') # description similarity
+
+w_lyr = 0.25
+w_comp = 0.20
+w_desc = 0.55
+
+lyrsim_weighted = lyrsim*w_lyr
+compsim_weighted = compsim*w_comp
+descsim_weighted = descsim*w_desc
 
 # json of proper names ("Phantom of the Opera, The" --> "The Phantom of the Opera")
 with open('proper_to_backend.json') as json_file:  
@@ -30,8 +40,7 @@ big_dict = pickle.load(pickle_in)
 	# keys: composer (str), img_name (str), currently_playing (bool)
 	# description (str), script (list)
 
-# data for javascript
-# use when we get correct img urls:
+# data for javascript. key=name, val=img path
 search_data = {k : big_dict[v]['img_name'] for (k,v) in proper_to_backend.items()}
 
 #### SEARCH FUNCITON START ####
@@ -48,15 +57,14 @@ def search():
 		query_backend = proper_to_backend[query]
 
 		if name_to_index[query_backend]:
+			# new ranker 
 			mus_idx = name_to_index[query_backend]
-			score_list = simmat[mus_idx]
+			score_list = lyrsim_weighted[mus_idx] + compsim_weighted[mus_idx] + descsim_weighted[mus_idx]
 			sorted_i = np.argsort(score_list)[::-1]
-
 			mus_score_list = [ backend_to_proper[ index_to_name[str(i)] ] for i,score in enumerate(score_list)]
-			
-			# get 11 results and delete top result, which is the query
-			data = np.array(mus_score_list)[sorted_i][:11]
-			data = np.delete(data, 0)
+
+			data = np.array(mus_score_list)[sorted_i][:10]
+			# new ranker end
 
 			# list of dictionaries
 			results_list = []

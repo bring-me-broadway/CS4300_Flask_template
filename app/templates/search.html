@@ -17,68 +17,60 @@
 
     </head>
     <body>
-        <!-- AUTOFILL -->
-        <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-        
         <!-- BODY CONTENT -->
-        <div class='content container'>
+        <div class='container'>
+            <h3>What broadway musical have you previously enjoyed?</h3>
+            <h6>Not sure where to start? Try "Aladdin"</h6>
+
             <!-- input -->
             <div class="form-inline global-search">
-
                 <!-- autocomplete MATERIALIZE -->
                 <div class="row">
                     <div class="col s12">
                         <div class="row">
-                            <div class="input-field col s12">
+                            <div class="input-field col s11">
                                 <!-- <i class="material-icons prefix">textsms</i> -->
                                 <input type="text" id="autocomplete-input" class="autocomplete">
                                 <label for="autocomplete-input">Musical Title</label>
                             </div>
+                            <div class="col s1">
+                                <a id='search-btn' class="waves-effect waves-light btn">BRING IT!</a>
+                            </div>
+                           
                         </div>
                     </div>
                 </div>
-
-                <button id="search-btn" class="btn btn-info"> 
-                    BRING IT! 
-                </button>
             </div>
+            <!-- input end -->
+
+            <!-- <h4>Or, let us <a id='search-btn' class="waves-effect waves-light btn">surprise</a>you</h4> -->
         
             <!-- output -->
             <div id='output-container'>
                 <div id='results'>
                     <h3 id='output-msg'>
-                        Because you like <i>{{query_title}}</i>, you might also like:
+                        Because you liked <i>{{query_title}}</i>, you might also like:
                     </h3>
                     <div class="row">
                     {% for dictitem in data_list_dicts %}  
                         <!-- MATERIALIZE START -->
-                            <div class="card col s5">
+                            <div class="card col s4">
                                 <div class="card-image waves-effect waves-block waves-light">
                                     <img class="activator" src="{{dictitem.img_name}}" alt="{{dictitem.name}}">
                                 </div>
                                 <div class="card-content">
-                                    <span class="card-title activator grey-text text-darken-4">{{dictitem.name}}<i class="material-icons right">more_vert</i></span>
-                                    <p><a href="#">This is a link</a></p>
-                                </div>
-                                <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">{{dictitem.name}}<i class="material-icons right">close</i></span>
-                                    <p>Composed by {{dictitem.composer}}. Here is some more information about this product that is only revealed once clicked on.</p>
+                                    <span class="card-title activator grey-text text-darken-4">{{dictitem.name}}</span>
+                                    <p>Composed by {{dictitem.composer}}.</p>
                                 </div>
                             </div>
                         <!-- MATERIALIZE END -->
                     {% endfor %}
                     </div> 
-
-
-                    
                 </div>
             </div>
+            <!-- output end  -->
         </div>
 
-        <!-- jquery 3.4.0 -->
-        <!-- <script type="text/javascript" src="../static/scripts/jquery-3.4.0.min.js"></script> -->
-        
         <!-- steph -->
         <script type="text/javascript" language="javascript">
             var outputMessage = document.getElementById("output-msg");
@@ -88,7 +80,7 @@
 
             // materialize
             $(document).ready(function(){
-                console.log(dataDict);
+                // console.log(dataDict);
                 $('input.autocomplete').autocomplete({
                     data: dataDict
                 });
@@ -96,9 +88,9 @@
             // materialize end
 
             $('#search-btn').click(function(){
-                console.log('clicked');
+                // console.log('clicked');
                 query = document.getElementById('autocomplete-input').value;
-                console.log('query');
+                // console.log('query');
 
                 if(query) {
                     $( document ).ajaxError(function( event, request, settings ) {
@@ -108,7 +100,7 @@
                     outputMessage.style.display = 'block';
 
                     query = encodeURIComponent(query.trim())
-                    console.log(query)
+                    // console.log(query)
                     let url = window.location.href + '?search=' + query;
                     
                     $('#output-container').load(url + ' #results');
@@ -118,12 +110,6 @@
             });
 
         </script>
-
-        <!-- AUTOFILL -->
-        <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="../static/scripts/autofill-dropdown.js"></script> -->
-        
     
     </body>
 </html>
