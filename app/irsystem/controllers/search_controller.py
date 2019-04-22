@@ -32,9 +32,7 @@ big_dict = pickle.load(pickle_in)
 
 # data for javascript
 # use when we get correct img urls:
-# 	search_data = {k : big_dict[v]['img_name'] for (k,v) in proper_to_backend.items()}
-
-search_data = {k : 'null' for (k,v) in proper_to_backend.items()}
+search_data = {k : big_dict[v]['img_name'] for (k,v) in proper_to_backend.items()}
 
 #### SEARCH FUNCITON START ####
 @irsystem.route('/', methods=['GET'])
@@ -43,9 +41,7 @@ def search():
 
 	if not query:
 		data = []
-		query_title = ''
 		results_list = []
-		data_dict = {}
 	else:
 		# convert from backend name to proper name
 		# query_title = proper_to_backend[query]
