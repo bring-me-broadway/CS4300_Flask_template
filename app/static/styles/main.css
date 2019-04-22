@@ -8,16 +8,13 @@
     src: url(../fonts/RobotoCondensed-Regular.ttf);
   }
 
-@media (min-width: 1200px) {
-    .container {
-        max-width: 970px;
-    }
+.hidden {
+    display: none;
 }
 
-@media (min-width:400px){
 .global-search {
-padding: 20px 0;
-text-align:center;
+    padding: 20px 0;
+    text-align:center;
 }
 
 
@@ -25,47 +22,28 @@ body {
     margin: 5% 10%;
 }
 
-header {
-    background-color:white;
-    border: 3px solid black;
-    padding: 25px;
-}
+
 .title {
     text-align: center;
-    font-family: ennio;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 200%;
 }
 .subheader {
     text-align: center;
-    font-family: robotoCondensed;
-    font-size:125%;
     text-transform: uppercase;
 }
 
-.content {
-    border: 3px solid black;
-    margin-top: 20px;
-    min-height: 500px;
-    padding:5%;
-}
 
 #error-msg {
     font-size: 30px;
-    font-family:ennio;
 }
 
 #output-container {
     text-align:center;
 }
 
-.ennio-font {
-    font-family:ennio;
-}
+
 .output-list {
-    font-size: 205%;
-    font-family: robotoCondensed;
     text-align: left;
     display: inline-block;
 }
@@ -89,5 +67,3 @@ header {
     padding-bottom: 5px;
     padding-right: 5px;
   }
-
-}

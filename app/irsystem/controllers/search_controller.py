@@ -26,9 +26,15 @@ proper_names_list = [*proper_to_backend]
 # UNLEASH THE PICKLE
 pickle_in = open("broadway_lyrics_v5.pkl","rb")
 big_dict = pickle.load(pickle_in)
-print(big_dict['Phantom of the Opera, The'])
-# keys: composer (str), img_name (str), currently_playing (bool)
-# description (str), script (list)
+	# print(big_dict['Phantom of the Opera, The'])
+	# keys: composer (str), img_name (str), currently_playing (bool)
+	# description (str), script (list)
+
+# data for javascript
+# use when we get correct img urls:
+# 	search_data = {k : big_dict[v]['img_name'] for (k,v) in proper_to_backend.items()}
+
+search_data = {k : 'null' for (k,v) in proper_to_backend.items()}
 
 #### SEARCH FUNCITON START ####
 @irsystem.route('/', methods=['GET'])
@@ -39,12 +45,14 @@ def search():
 		data = []
 		query_title = ''
 		results_list = []
+		data_dict = {}
 	else:
 		# convert from backend name to proper name
-		query_title = backend_to_proper[query]
+		# query_title = proper_to_backend[query]
+		query_backend = proper_to_backend[query]
 
-		if name_to_index[query]:
-			mus_idx = name_to_index[query]
+		if name_to_index[query_backend]:
+			mus_idx = name_to_index[query_backend]
 			score_list = simmat[mus_idx]
 			sorted_i = np.argsort(score_list)[::-1]
 
@@ -69,4 +77,4 @@ def search():
 
 	return render_template('search.html', \
 		name=project_name, netid=net_id, \
-		query_title=query_title, data_list_dicts=results_list, allshows=proper_names_list, proper_to_backend_dict=proper_to_backend)
+		query_title=query, data_list_dicts=results_list, proper_to_backend_dict=proper_to_backend, search_data=search_data )
