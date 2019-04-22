@@ -1,3 +1,4 @@
+// https://bootsnipp.com/snippets/0Bn1j
 $( function() {
     $.widget( "custom.combobox", {
       _create: function() {

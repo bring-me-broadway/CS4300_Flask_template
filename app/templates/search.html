@@ -1,6 +1,8 @@
 <html>
     <head>
         <link rel="stylesheet" href="../static/styles/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        
         <link rel="stylesheet" href="../static/styles/main.css">
         
         <!-- AUTOFILL -->
@@ -13,6 +15,8 @@
         <!-- AUTOFILL -->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!-- bootstrap -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
         <!-- HEADER  -->
         <header>
@@ -25,14 +29,11 @@
         </header>
         
         <!-- BODY CONTENT -->
-        <div class='content'>
+        <div class='content container'>
             <!-- input -->
             <div class="form-inline global-search">
-                <!-- <div class="form-group">
-                    <input id="musical-input" type="text" name="search" class="form-control" placeholder="broadway show">
-                </div> -->
 
-                <!-- AUTOFILL -->
+                <!-- AUTOFILL https://bootsnipp.com/snippets/0Bn1j -->
                 <div class="container">
                     <div class="row">
                         <div class="ui-widget">
@@ -46,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- AUTOFILL CODE -->
+                <!-- AUTOFILL CODE END -->
 
                 <button id="search-btn" class="btn btn-info"> 
                     BRING IT! 
@@ -59,11 +60,14 @@
                     <h2 id='output-msg' class='ennio-font'>
                         Because you like <i>{{query_title}}</i>, you might also like:
                     </h2>
-                    <div class='output-list'>
-                    {% for d in data %}  
-                        <p>{{d}}</p>
+                    {% for dictitem in data_list_dicts %}  
+                        <div class='row'>
+                            <div class='col-sm'><img src="{{dictitem.img_name}}" alt="{{dictitem.name}}"></div>
+                            <div class='col-sm'>{{dictitem.name}}</div>
+                            <div class='col-sm'>Composed by {{dictitem.composer}}</div>
+                        </div>
+                      
                     {% endfor %}
-                    </div>
                 </div>
             </div>
         </div>
@@ -115,6 +119,8 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../static/scripts/autofill-dropdown.js"></script>
+        
+        
 
     </body>
 </html>
