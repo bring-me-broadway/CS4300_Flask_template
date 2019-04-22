@@ -49,21 +49,11 @@ body {
 }
 
 
-/** AUTOFILL DROPDOWN **/
-.custom-musical-input {
-    position: relative;
-    display: inline-block;
-  }
-  .custom-musical-input {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin-left: -1px;
-    padding: 0;
-  }
-  .custom-musical-input {
-    margin: 0;
-    padding-top: 2px;
-    padding-bottom: 5px;
-    padding-right: 5px;
-  }
+/* materialize card overrides */
+.card .card-content {
+    height: 150px;
+}
+
+.card .card-title {
+    font-size: 22px;
+}

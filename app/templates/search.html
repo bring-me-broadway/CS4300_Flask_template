@@ -3,9 +3,9 @@
         <link rel="stylesheet" href="../static/styles/main.css">
         
         <!-- AUTOFILL -->
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
         <!-- materialize.css -->
         <!-- Compiled and minified CSS -->
@@ -52,19 +52,20 @@
                         Because you liked <i>{{query_title}}</i>, you might also like:
                     </h3>
                     <div class="row">
-                    {% for dictitem in data_list_dicts %}  
+                    {% for dictitem in data_list_dicts %} 
+                        <!-- TODO: figure out how to only have 3 per row -->
                         <!-- MATERIALIZE START -->
-                            <div class="card col s4">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="{{dictitem.img_name}}" alt="{{dictitem.name}}">
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-title activator grey-text text-darken-4">{{dictitem.name}}</span>
-                                    <p>Composed by {{dictitem.composer}}.</p>
-                                </div>
+                        <div class="card col s4">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="{{dictitem.img_name}}" alt="{{dictitem.name}}">
                             </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">{{dictitem.name}}</span>
+                                <p>Composed by {{dictitem.composer}}.</p>
+                            </div>
+                        </div>
                         <!-- MATERIALIZE END -->
-                    {% endfor %}
+                    {%- endfor %}
                     </div> 
                 </div>
             </div>
