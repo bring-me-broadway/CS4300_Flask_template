@@ -1,9 +1,19 @@
 <html>
     <head>
-        <link rel="stylesheet" href="/static/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/main.css">
+        <link rel="stylesheet" href="../static/styles/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/styles/main.css">
+        
+        <!-- AUTOFILL -->
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
     </head>
     <body>
+        <!-- AUTOFILL -->
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
         <!-- HEADER  -->
         <header>
             <h1 class='title'>
@@ -18,9 +28,26 @@
         <div class='content'>
             <!-- input -->
             <div class="form-inline global-search">
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <input id="musical-input" type="text" name="search" class="form-control" placeholder="broadway show">
+                </div> -->
+
+                <!-- AUTOFILL -->
+                <div class="container">
+                    <div class="row">
+                        <div class="ui-widget">
+                            <label>Procedure: </label>
+                            <select id="combobox">
+                                <option></option>
+                                {% for proper_name, backend_name in proper_to_backend_dict.items() %}
+                                    <option value='{{backend_name}}'>{{proper_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
                 </div>
+                <!-- AUTOFILL CODE -->
+
                 <button id="search-btn" class="btn btn-info"> 
                     BRING IT! 
                 </button>
@@ -40,23 +67,25 @@
                 </div>
             </div>
         </div>
+
+        <!-- jquery 3.4.0 -->
+        <script type="text/javascript" src="../static/scripts/jquery-3.4.0.min.js"></script>
         
-
-        <!-- jquery -->
-        <script type="text/javascript" src="../static/jquery-3.4.0.min.js"></script>
+        <!-- steph -->
         <script type="text/javascript" language="javascript">
-
             var outputMessage = document.getElementById("output-msg");
             outputMessage.style.display = 'none';
             outputMessage.style.fontFamily = 'ennio';
 
-
             $('#search-btn').click(function(){
-                console.log('clicked')
-                query = document.getElementById('musical-input').value;
+                console.log('clicked');
+                query = document.getElementById('combobox').value;
+                // query = $("#combobox option:selected").text();
+                console.log('query');
+
                 if(query) {
                     $( document ).ajaxError(function( event, request, settings ) {
-                        $( "#output-container" ).html( "<p id='error-msg'>We couldn't find '" + decodeURIComponent(query) + "'... check your spelling and try again!</p>" );
+                        $( "#output-container" ).html( "<p id='error-msg'>We couldn't find '" + decodeURIComponent(query) + "'... try again!</p>" );
                     });
                     // show output message
                     outputMessage.style.display = 'block';
@@ -71,13 +100,21 @@
                 }
             });
 
-            $('#musical-input').keypress(function(e){
-                if(e.which == 13){//Enter key pressed
-                    $('#search-btn').click();//Trigger search button click event
-                }
-            });
+            // let comboboxInput = document.getElementsByClassName("custom-combobox-input")[0]
+
+            // $(comboboxInput).keypress(function(e){
+            //     console.log('yeet');
+            //     if(e.which == 13){//Enter key pressed
+            //         $('#search-btn').click();//Trigger search button click event
+            //     }
+            // });
 
         </script>
+
+        <!-- AUTOFILL -->
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="../static/scripts/autofill-dropdown.js"></script>
 
     </body>
 </html>

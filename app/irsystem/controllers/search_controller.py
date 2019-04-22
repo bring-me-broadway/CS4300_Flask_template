@@ -13,19 +13,17 @@ with open('name_to_index.json') as json_file:
 with open('index_to_name.json') as json_file:  
     index_to_name = json.load(json_file)
 
-# lowercase the dictionaries
-name_to_index = dict((k.lower(), v) for k,v in name_to_index.items())
-print(name_to_index)
+# json of proper names ("Phantom of the Opera, The" --> "The Phantom of the Opera")
+with open('proper_to_backend.json') as json_file:  
+    proper_to_backend = json.load(json_file)
+with open('backend_to_proper.json') as json_file:  
+    backend_to_proper = json.load(json_file)
 
-index_to_name = dict((k, v.lower()) for k,v in index_to_name.items())
-print(index_to_name)
+# list of proper names for display
+proper_names = [*proper_to_backend]
 
-# https://stackoverflow.com/questions/1549641/how-to-capitalize-the-first-letter-of-each-word-in-a-string-python
-def repl_func(m):
-    """process regular expression match groups for word upper-casing problem"""
-    return m.group(1) + m.group(2).upper()
-# end
 
+#### SEARCH FUNCITON START ####
 @irsystem.route('/', methods=['GET'])
 def search():
 	query = request.args.get('search')
@@ -34,19 +32,18 @@ def search():
 		data = []
 		query_title = ''
 	else:
-		# lowercase the query
-		musical = query.lower()
-		if name_to_index[musical]:
-			mus_idx = name_to_index[musical]
+		# convert from backend name to proper name
+		query_title = backend_to_proper[query]
+
+		if name_to_index[query]:
+			mus_idx = name_to_index[query]
 			score_list = simmat[mus_idx]
 			sorted_i = np.argsort(score_list)[::-1]
-			# print(index_to_name)
 
-			mus_score_list = [ re.sub("(^|\s)(\S)", repl_func, index_to_name[str(i)]) for i,score in enumerate(score_list)]
-			query_title = musical.title()
+			mus_score_list = [ index_to_name[str(i)] for i,score in enumerate(score_list)]
 			
 			# get results except top result, which is the query
 			data = np.array(mus_score_list)[sorted_i][:10]
 			data = np.delete(data, 0)
 		
-	return render_template('search.html', name=project_name, netid=net_id, query_title=query_title, data=data)
+	return render_template('search.html', name=project_name, netid=net_id, query_title=query_title, data=data, allshows=proper_names, proper_to_backend_dict=proper_to_backend)

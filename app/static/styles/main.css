@@ -1,11 +1,11 @@
 @font-face {
     font-family: ennio;
-    src: url(EnnioFY-bold.ttf);
+    src: url(../fonts/EnnioFY-bold.ttf);
 }
 
 @font-face {
     font-family: robotoCondensed;
-    src: url(RobotoCondensed-Regular.ttf);
+    src: url(../fonts/RobotoCondensed-Regular.ttf);
   }
 
 @media (min-width: 1200px) {
@@ -20,7 +20,7 @@ padding: 20px 0;
 text-align:center;
 }
 
-/** start steph **/
+
 body {
     margin: 5% 10%;
 }
@@ -71,33 +71,23 @@ header {
 }
 
 
-/** end steph **/
+/** AUTOFILL DROPDOWN **/
+.custom-musical-input {
+    position: relative;
+    display: inline-block;
+  }
+  .custom-musical-input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+  }
+  .custom-musical-input {
+    margin: 0;
+    padding-top: 2px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+  }
 
-
-.global-search {
-text-align:center;
-padding:10px;
-}
-.global-search .form-control {
-width:500px;
-border-radius: 0;
-}
-.global-search * {
-display:inline-block;
-margin-bottom:0;
-}
-}
-.topcorner{
-position:absolute;
-top:2%;
-right:2%;
-}
-.btn{
-    background-color: #4285F4;
-    border: none;
-    border-radius:0;
-    font-family:ennio;
-}
-.step-links a{
-color: #4285F4;
 }
