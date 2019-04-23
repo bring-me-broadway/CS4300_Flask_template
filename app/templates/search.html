@@ -51,23 +51,27 @@
                     <h3 id='output-msg'>
                         Because you liked <i>{{query_title}}</i>, you might also like:
                     </h3>
-                    <div class="row">
-                    {% for dictitem in data_list_dicts %} 
-                        <!-- TODO: figure out how to only have 3 per row -->
-                        <!-- MATERIALIZE START -->
-                        <div class="card col s4">
-                            <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="{{dictitem.img_name}}" alt="{{dictitem.name}}">
+                    {% for item in data_list_dicts %}
+                        {% if loop.index0 % 3 == 0 %}
+                        <div class="row">
+                        {% endif %}
+                            <!-- MATERIALIZE START -->
+                            <div class="card col s4">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="{{item.img_name}}" alt="{{item.name}}">
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4">{{item.name}}</span>
+                                    <p>Composed by {{item.composer}}.</p>
+                                </div>
                             </div>
-                            <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4">{{dictitem.name}}</span>
-                                <p>Composed by {{dictitem.composer}}.</p>
-                            </div>
+                            <!-- MATERIALIZE END -->
+                        {% if loop.index0 % 3 == 2 or loop.last %}
                         </div>
-                        <!-- MATERIALIZE END -->
-                    {%- endfor %}
-                    </div> 
+                        {% endif %}
+                        {% endfor %}
                 </div>
+                <!-- </div> -->
             </div>
             <!-- output end  -->
         </div>
