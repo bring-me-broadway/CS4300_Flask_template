@@ -51,9 +51,9 @@ def search():
 	if not query:
 		data = []
 		results_list = []
+		query_data = None
 	else:
-		# convert from backend name to proper name
-		# query_title = proper_to_backend[query]
+		# convert from proper name to backend name
 		query_backend = proper_to_backend[query]
 
 		if name_to_index[query_backend]:
@@ -63,8 +63,7 @@ def search():
 			sorted_i = np.argsort(score_list)[::-1]
 			mus_score_list = [ backend_to_proper[ index_to_name[str(i)] ] for i,score in enumerate(score_list)]
 
-			data = np.array(mus_score_list)[sorted_i][:10]
-			# new ranker end
+			data = np.array(mus_score_list)[sorted_i][1:11]
 
 			# list of dictionaries
 			results_list = []
@@ -79,6 +78,11 @@ def search():
 					 'currently_playing': info['currently_playing']
 					})
 
+			# info for query
+			query_info = big_dict[query_backend]
+			query_data = {'name': query, 'composer': query_info['composer'], 'img_name': query_info['img_name'], \
+					 'currently_playing': query_info['currently_playing'] }
+
 	return render_template('search.html', \
 		name=project_name, netid=net_id, \
-		query_title=query, data_list_dicts=results_list, proper_to_backend_dict=proper_to_backend, search_data=search_data )
+		query_title=query, data_list_dicts=results_list, proper_to_backend_dict=proper_to_backend, search_data=search_data, query_data=query_data )

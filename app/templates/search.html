@@ -48,9 +48,24 @@
             <!-- output -->
             <div id='output-container'>
                 <div id='results'>
-                    <h3 id='output-msg'>
-                        Because you liked <i>{{query_title}}</i>, you might also like:
-                    </h3>
+                    <div id='output-msg'>
+                        <h4>Because you liked <i>{{query_title}}</i></h4>
+                        <!-- query card  -->
+                        <div class='row'>
+                            <div class="card col s4 invisible"></div>
+                            <div class="card col s4">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="{{query_data.img_name}}" alt="{{query_data.name}}">
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4">{{query_data.name}}</span>
+                                    <p>Composed by {{query_data.composer}}.</p>
+                                </div>
+                            </div>
+                            <div class="card col s4 invisible"></div>
+                        </div>
+                        <h4>You might also like:</h4>
+                    </div>
                     {% for item in data_list_dicts %}
                         {% if loop.index0 % 3 == 0 %}
                         <div class="row">
@@ -83,7 +98,7 @@
 
             var dataDict = {{ search_data|tojson }};
 
-            // materialize
+            // materialize autocomplete
             $(document).ready(function(){
                 // console.log(dataDict);
                 $('input.autocomplete').autocomplete({

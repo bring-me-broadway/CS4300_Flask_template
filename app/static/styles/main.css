@@ -52,8 +52,14 @@ body {
 /* materialize card overrides */
 .card .card-content {
     height: 150px;
+    overflow: scroll;
 }
 
 .card .card-title {
     font-size: 18px;
+}
+
+.card .invisible {
+    -webkit-box-shadow: 0; 
+    box-shadow: 0;
 }
