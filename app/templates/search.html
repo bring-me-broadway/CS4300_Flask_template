@@ -1,7 +1,5 @@
 <html>
     <head>
-        <link rel="stylesheet" href="../static/styles/main.css">
-        
         <!-- AUTOFILL -->
         <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -14,34 +12,45 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
+        <!-- steph css -->
+        <link rel="stylesheet" href="../static/styles/main.css">
     </head>
     <body>
-        <!-- BODY CONTENT -->
-        <div class='container'>
-            <h3>What broadway musical have you previously enjoyed?</h3>
-            <h6>Not sure where to start? Try "Aladdin"</h6>
+        <img src="../static/images/leftcurtain.svg" id='left-curtain' alt="left curtain">
+        <img src="../static/images/rightcurtain.svg" id='right-curtain' alt="right curtain">
+        <header>
+            <h1>bring me broadway</h1>
+            <div class='input-container'>
+                <h3>What broadway musical have you previously enjoyed?</h3>
+                <h6>Not sure where to start? Try "Aladdin"</h6>
 
-            <!-- input -->
-            <div class="form-inline global-search">
-                <!-- autocomplete MATERIALIZE -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="row">
-                            <div class="input-field col s11">
-                                <!-- <i class="material-icons prefix">textsms</i> -->
-                                <input type="text" id="autocomplete-input" class="autocomplete">
-                                <label for="autocomplete-input">Musical Title</label>
+                <!-- input -->
+                <div class="form-inline global-search">
+                    <!-- autocomplete MATERIALIZE -->
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <!-- <i class="material-icons prefix">textsms</i> -->
+                                    <input type="text" id="autocomplete-input" class="autocomplete">
+                                    <label for="autocomplete-input" class='white-text'>Musical Title</label>
+                                </div>
                             </div>
-                            <div class="col s1">
-                                <a id='search-btn' class="waves-effect waves-light btn">BRING IT!</a>
+                            <div class="row">
+                                <a id='search-btn' class="waves-effect waves-light btn ">BRING IT!</a>
                             </div>
-                           
                         </div>
                     </div>
                 </div>
+                <!-- input end -->
             </div>
-            <!-- input end -->
+
+            <!-- <span id="down">&#8595;</span> -->
+
+        </header>
+        <!-- BODY CONTENT -->
+        <div class='container' id='start'>
+            
 
             <!-- <h4>Or, let us <a id='search-btn' class="waves-effect waves-light btn">surprise</a>you</h4> -->
         
@@ -51,19 +60,20 @@
                     <div id='output-msg'>
                         <h4>Because you liked <i>{{query_title}}</i></h4>
                         <!-- query card  -->
-                        <div class='row'>
-                            <div class="card col s4 invisible"></div>
-                            <div class="card col s4">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="{{query_data.img_name}}" alt="{{query_data.name}}">
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-title activator grey-text text-darken-4">{{query_data.name}}</span>
-                                    <p>Composed by {{query_data.composer}}.</p>
-                                </div>
+                        <div class="row">
+                            <div class="col s5">
+                                <img class="activator" src="{{query_data.img_name}}" alt="{{query_data.name}}">
                             </div>
-                            <div class="card col s4 invisible"></div>
-                        </div>
+                            <div class="col s7">
+                              <div class="card grey lighten-5">
+                                <div class="card-content">
+                                  <span class="card-title">{{query_data.name}}</span>
+                                  <p>Composed by {{query_data.composer}}.</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end query card -->
                         <h4>You might also like:</h4>
                     </div>
                     {% for item in data_list_dicts %}
@@ -71,7 +81,7 @@
                         <div class="row">
                         {% endif %}
                             <!-- MATERIALIZE START -->
-                            <div class="card col s4">
+                            <div class="card col s3 offset-s1">
                                 <div class="card-image waves-effect waves-block waves-light">
                                     <img class="activator" src="{{item.img_name}}" alt="{{item.name}}">
                                 </div>
@@ -91,6 +101,30 @@
             <!-- output end  -->
         </div>
 
+        <!-- toggle test -->
+        <script>
+        $("#search-btn").on("click", function () {
+            $("header").slideUp(1000);
+        });
+        </script>
+
+        <!-- toggle test end -->
+        <!-- tutorial  -->
+        <script type="text/javascript">
+            //scroll to top on page refresh (PART1)
+            window.onbeforeunload = function () {
+                window.scrollTo(0, 0);
+            }
+            //for arrow click part (PART2)
+            $(document).ready( function () {
+                $('#down').on('click',function () {
+                $("html").scrollTop(0);
+                $('html, body').animate({
+                    scrollTop: $('#start').offset().top
+                }, 1000);
+                });
+            });
+            </script>
         <!-- steph -->
         <script type="text/javascript" language="javascript">
             var outputMessage = document.getElementById("output-msg");

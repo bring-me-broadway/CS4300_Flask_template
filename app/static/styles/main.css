@@ -17,11 +17,73 @@
     text-align:center;
 }
 
-
 body {
-    margin: 5% 10%;
+    background-color: #fffaf0;
 }
 
+/* tutorial */
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+#left-curtain {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:200;
+}
+
+#right-curtain {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index:200;
+}
+
+header {
+    text-align: center;
+	position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background-color:#ff6666;
+    z-index: 100;
+
+    color: #b20000;
+}
+
+.input-container {
+    margin: 0 20%;
+}
+
+#down {
+	top:85vh;
+	size: 40px;
+	padding: 20px;
+    font-size: 2.5em;
+    text-align: center;
+}
+
+
+#down:hover {
+	cursor: pointer;
+	background-color: #eee;
+	opacity: 0.8;
+}
+/* tutorial end */
+
+/* hide content */
+.container {
+
+}
 
 .title {
     text-align: center;
@@ -50,13 +112,23 @@ body {
 
 
 /* materialize card overrides */
+.row .col {
+    padding:0;
+}
+
+.card {
+    box-shadow: 10px 10px #2bd8d8;
+}
 .card .card-content {
-    height: 150px;
-    overflow: scroll;
+    padding: 15px;
 }
 
 .card .card-title {
     font-size: 18px;
+}
+
+.card .card-content .card-title {
+    line-height: normal;
 }
 
 .card .invisible {
