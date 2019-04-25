@@ -1,12 +1,21 @@
 @font-face {
-    font-family: ennio;
-    src: url(../fonts/EnnioFY-bold.ttf);
+    font-family: futura;
+    src: url(../fonts/Futura-Heavy.ttf);
 }
 
 @font-face {
     font-family: robotoCondensed;
     src: url(../fonts/RobotoCondensed-Regular.ttf);
-  }
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    background-color: #fffaf0;
+}
 
 .hidden {
     display: none;
@@ -17,15 +26,56 @@
     text-align:center;
 }
 
-body {
-    background-color: #fffaf0;
+/* OPENING PAGE STUFF */
+
+.marquee h1 {
+    font-family: futura, sans-serif;
+    color: white;
+    text-shadow: 0px 0px 5px yellow, 0px 0px 5px orange, 0 0 5px white;
+    margin: 1%;
 }
 
-/* tutorial */
-* {
-    padding: 0px;
-    margin: 0px;
+#blink {
+    color: white;
+    font-family:futura, sans-serif;
+    animation: blink 4s linear infinite;
+    
 }
+@keyframes blink {
+    78% {
+        color: inherit;
+        text-shadow: inherit;
+      }
+      79%{
+         color: white;
+      }
+      80% {
+        
+        text-shadow: none;
+      }
+      81% {
+        color: inherit;
+        text-shadow: inherit;
+      }
+      82% {
+        color: white;
+        text-shadow: none;
+      }
+      83% {
+        color: inherit;
+        text-shadow: inherit;
+      }
+      92% {
+        color: white;
+        text-shadow: none;
+      }
+      92.5% {
+        color: inherit;
+        text-shadow: inherit;
+      }
+}
+
+
 
 #left-curtain {
     height: 100%;
@@ -78,18 +128,14 @@ header {
 	background-color: #eee;
 	opacity: 0.8;
 }
-/* tutorial end */
 
-/* hide content */
-.container {
-
-}
 
 .title {
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
 .subheader {
     text-align: center;
     text-transform: uppercase;
@@ -118,6 +164,12 @@ header {
 
 .card {
     box-shadow: 10px 10px #2bd8d8;
+    transition: transform .2s ease-in-out, box-shadow .2s;
+}
+
+.card:hover {
+    box-shadow: 20px 20px #2bd8d8;
+    transform: translate(-10px,-10px);
 }
 .card .card-content {
     padding: 15px;

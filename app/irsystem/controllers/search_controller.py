@@ -63,7 +63,7 @@ def search():
 			sorted_i = np.argsort(score_list)[::-1]
 			mus_score_list = [ backend_to_proper[ index_to_name[str(i)] ] for i,score in enumerate(score_list)]
 
-			data = np.array(mus_score_list)[sorted_i][1:11]
+			data = np.array(mus_score_list)[sorted_i][1:13]
 
 			# list of dictionaries
 			results_list = []
