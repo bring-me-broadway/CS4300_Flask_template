@@ -2,10 +2,13 @@
     font-family: futura;
     src: url(../fonts/Futura-Heavy.ttf);
 }
-
 @font-face {
     font-family: robotoCondensed;
     src: url(../fonts/RobotoCondensed-Regular.ttf);
+}
+@font-face {
+    font-family:robotoCondensedBold;
+    src: url(../fonts/RobotoCondensed-Bold.ttf);
 }
 
 * {
@@ -31,52 +34,61 @@ body {
 .marquee h1 {
     font-family: futura, sans-serif;
     color: white;
-    text-shadow: 0px 0px 5px yellow, 0px 0px 5px orange, 0 0 5px white;
+    /* text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white; */
     margin: 1%;
 }
 
-#blink {
+#blink1 { animation: blink1 4s step-start 0s infinite; }
+@keyframes blink1 {
+    10% { color: white; text-shadow: none; }
+    40% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    50% { color: white; text-shadow: none; }
+    60% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    70% { color: white; text-shadow: none; }
+    80% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    90% { color: white; text-shadow: none; }
+    100% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+}
+
+#blink2 { animation: blink2 4s step-start 0s infinite; }
+@keyframes blink2 {
+    20% { color: white; text-shadow: none; }
+    40% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    50% { color: white; text-shadow: none; }
+    60% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    70% { color: white; text-shadow: none; }
+    80% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    90% { color: white; text-shadow: none; }
+    100% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+}
+
+#blink3 { animation: blink3 4s step-start 0s infinite; }
+@keyframes blink3 {
+    30% { color: white; text-shadow: none; }
+    40% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    50% { color: white; text-shadow: none; }
+    60% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    70% { color: white; text-shadow: none; }
+    80% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    90% { color: white; text-shadow: none; }
+    100% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+}
+
+/* .blink {
     color: white;
     font-family:futura, sans-serif;
-    animation: blink 4s linear infinite;
-    
+    animation: blink 2s step-start 0s infinite;
 }
 @keyframes blink {
-    78% {
-        color: inherit;
-        text-shadow: inherit;
-      }
-      79%{
-         color: white;
-      }
-      80% {
-        
-        text-shadow: none;
-      }
-      81% {
-        color: inherit;
-        text-shadow: inherit;
-      }
-      82% {
-        color: white;
-        text-shadow: none;
-      }
-      83% {
-        color: inherit;
-        text-shadow: inherit;
-      }
-      92% {
-        color: white;
-        text-shadow: none;
-      }
-      92.5% {
-        color: inherit;
-        text-shadow: inherit;
-      }
-}
+    0% { color: white; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white; }
+    50% { color: white; text-shadow: none; }
+    100% { color: white; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white; }
+} */
 
 
 
+
+/* curtain svgs */
 #left-curtain {
     height: 100%;
     position: absolute;
@@ -91,6 +103,10 @@ body {
     top: 0;
     right: 0;
     z-index:200;
+}
+
+.prompt {
+    font-family:robotoCondensedBold;
 }
 
 header {
