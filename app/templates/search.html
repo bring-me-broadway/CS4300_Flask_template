@@ -1,68 +1,167 @@
 <html>
     <head>
-        <link rel="stylesheet" href="/static/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/main.css">
+        <!-- AUTOFILL -->
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+        <!-- materialize.css -->
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- steph css -->
+        <link rel="stylesheet" href="../static/styles/main.css">
     </head>
     <body>
-        <!-- HEADER  -->
+        <img src="../static/images/leftcurtain.svg" id='left-curtain' alt="left curtain">
+        <img src="../static/images/rightcurtain.svg" id='right-curtain' alt="right curtain">
         <header>
-            <h1 class='title'>
-                {{ name }}
-            </h1>
-            <h4 class='subheader'>
-                {{ netid }}
-            </h4>
-        </header>
-        
-        <!-- BODY CONTENT -->
-        <div class='content'>
-            <!-- input -->
-            <div class="form-inline global-search">
-                <div class="form-group">
-                    <input id="musical-input" type="text" name="search" class="form-control" placeholder="broadway show">
+            <div class='header-content'>
+                <div class="marquee">
+                    <h1><span class='blink' id='blink1'>BRING</span> <span class='blink' id='blink2'>ME</span></h1>
+                    <h1><span class='blink' id='blink3'>BROADWAY</span></h1>
                 </div>
-                <button id="search-btn" class="btn btn-info"> 
-                    BRING IT! 
-                </button>
+                
+                <div class='input-container'>
+                    <div class='marquee-lined'>
+                        <h4 class='prompt'>What broadway musical have you previously enjoyed?</h4>
+                        <h5 class='prompt subtitle'>Not sure where to start? Try "Aladdin"</h5>
+                    </div>
+                    
+                    <!-- input -->
+                        <!-- autocomplete MATERIALIZE -->
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input type="text" id="autocomplete-input" class="autocomplete white-text">
+                                        <label for="autocomplete-input" class='black-text'>Musical Title</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <a id='search-btn' class="waves-effect waves-light btn ">BRING IT!</a>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- input end -->
+                </div>
             </div>
-        
+        </header>
+        <!-- BODY CONTENT -->
+        <div class='container' id='start'>
+            <div id='search-again'>
+                <span class='roboto-caps faded'>search again</span>
+                <img src="../static/images/lever.svg" id='lever' alt="lever">
+            </div>
             <!-- output -->
             <div id='output-container'>
+
                 <div id='results'>
-                    <h2 id='output-msg' class='ennio-font'>
-                        Because you like <i>{{query_title}}</i>, you might also like:
-                    </h2>
-                    <div class='output-list'>
-                    {% for d in data %}  
-                        <p>{{d}}</p>
-                    {% endfor %}
+                    <div id='output-msg'>
+                        <h3 class='roboto-caps marquee-lined'>Because you liked <br>
+                            <i class='subtitle'>{{query_title}}</i>
+                        </h3>
+                        <!-- query card  -->
+                        <div class="row" id='query-row'>
+                            <div class="card col s12">
+                                <div class="card-image waves-effect waves-block waves-light col s3">
+                                    <img class="activator" src="{{query_data.img_name}}" alt="{{query_data.name}}">
+                                </div>
+                                <div class="card-content col s9">
+                                  <span class="card-title">{{query_data.name}}</span>
+                                  <p><i class="material-icons">star</i>{{query_data.show_score}}</p>
+                                  <p>{{query_data.description}}</p>
+                                  {% if query_data.composer %}
+                                    <p>Composed by {{query_data.composer}}</p>
+                                  {% endif %}
+                                  {% if query_data.currently_playing %}
+                                    <p>Buy tickets for NYC show: {{query_data.ticket_link}}</p>
+                                  {% endif %}
+                                </div>
+                              <!-- </div> -->
+                            </div>
+                          </div>
+                          <!-- end query card -->
+                        <h4 class='roboto-caps'>You might also like:</h4>
                     </div>
+                    {% for item in data_list_dicts %}
+                        {% if loop.index0 % 3 == 0 %}
+                        <div class="row">
+                        {% endif %}
+                            <!-- MATERIALIZE START -->
+                            <div class="card col s3 offset-s1">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="{{item.img_name}}" alt="{{item.name}}">
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4">{{item.name}}</span>
+                                    <p>Rating: {{item.show_score}}</p>
+                                    <p>{{item.description}}</p>
+                                    {% if item.composer %}
+                                        <p>Composed by {{item.composer}}</p>
+                                    {% endif %}
+                                    {% if item.currently_playing %}
+                                        <p>Buy tickets for NYC show: {{item.ticket_link}}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- MATERIALIZE END -->
+                        {% if loop.index0 % 3 == 2 or loop.last %}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
                 </div>
+                <!-- </div> -->
             </div>
+            <!-- output end  -->
         </div>
-        
 
-        <!-- jquery -->
-        <script type="text/javascript" src="../static/jquery-3.4.0.min.js"></script>
+        <!-- curtain controls -->
+        <script>
+        $("#search-btn").on("click", function () {
+            $("header").slideUp(1000);
+        });
+
+        $("#search-again").on("click", function () {
+            $("header").slideDown(1000);
+        });
+
+        </script>
+        <!-- curtain controls end -->
+ 
+        <!-- steph -->
         <script type="text/javascript" language="javascript">
-
             var outputMessage = document.getElementById("output-msg");
             outputMessage.style.display = 'none';
-            outputMessage.style.fontFamily = 'ennio';
 
+            var dataDict = {{ search_data|tojson }};
+
+            // materialize autocomplete
+            $(document).ready(function(){
+                // console.log(dataDict);
+                $('input.autocomplete').autocomplete({
+                    data: dataDict
+                });
+            });
+            // materialize end
 
             $('#search-btn').click(function(){
-                console.log('clicked')
-                query = document.getElementById('musical-input').value;
+                // console.log('clicked');
+                query = document.getElementById('autocomplete-input').value;
+                // console.log('query');
+
                 if(query) {
                     $( document ).ajaxError(function( event, request, settings ) {
-                        $( "#output-container" ).html( "<p id='error-msg'>We couldn't find '" + decodeURIComponent(query) + "'... check your spelling and try again!</p>" );
+                        $( "#output-container" ).html( "<p id='error-msg' class='roboto-caps'>We couldn't find '" + decodeURIComponent(query) + "'... try again!</p>" );
                     });
                     // show output message
                     outputMessage.style.display = 'block';
 
                     query = encodeURIComponent(query.trim())
-                    console.log(query)
+                    // console.log(query)
                     let url = window.location.href + '?search=' + query;
                     
                     $('#output-container').load(url + ' #results');
@@ -71,14 +170,8 @@
                 }
             });
 
-            $('#musical-input').keypress(function(e){
-                if(e.which == 13){//Enter key pressed
-                    $('#search-btn').click();//Trigger search button click event
-                }
-            });
-
         </script>
-
+    
     </body>
 </html>
 

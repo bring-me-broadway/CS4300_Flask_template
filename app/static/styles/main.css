@@ -1,0 +1,258 @@
+@font-face {
+    font-family: futuraLight;
+    src: url(../fonts/Futura-Light.ttf);
+}
+@font-face {
+    font-family: futuraMedium;
+    src: url(../fonts/Futura-Medium.ttf);
+}
+@font-face {
+    font-family: futuraHeavy;
+    src: url(../fonts/Futura-Heavy.ttf);
+}
+@font-face {
+    font-family: robotoCondensed;
+    src: url(../fonts/RobotoCondensed-Regular.ttf);
+}
+@font-face {
+    font-family:robotoCondensedBold;
+    src: url(../fonts/RobotoCondensed-Bold.ttf);
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    background-color: #fffaf0;
+}
+
+.roboto-caps {
+    text-transform: uppercase;
+    font-family:robotoCondensedBold;
+}
+
+/* OPENING PAGE STUFF */
+
+.marquee {
+    /* background-color: black; */
+    display: inline-block;
+    padding: 2%;
+    border-radius: 24px;
+    border: dotted 10px #F9FBA8;
+}
+.marquee h1 {
+    font-family: futuraHeavy, sans-serif;
+    color: white;
+    margin: 1%;
+}
+
+#blink1 { animation: blink1 4s step-start 0s infinite; }
+@keyframes blink1 {
+    10% { color: white; text-shadow: none; }
+    40% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    50% { color: white; text-shadow: none; }
+    60% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    70% { color: white; text-shadow: none; }
+    80% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    90% { color: white; text-shadow: none; }
+    100% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+}
+
+#blink2 { animation: blink2 4s step-start 0s infinite; }
+@keyframes blink2 {
+    20% { color: white; text-shadow: none; }
+    40% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    50% { color: white; text-shadow: none; }
+    60% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    70% { color: white; text-shadow: none; }
+    80% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    90% { color: white; text-shadow: none; }
+    100% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+}
+
+#blink3 { animation: blink3 4s step-start 0s infinite; }
+@keyframes blink3 {
+    30% { color: white; text-shadow: none; }
+    40% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    50% { color: white; text-shadow: none; }
+    60% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    70% { color: white; text-shadow: none; }
+    80% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+    90% { color: white; text-shadow: none; }
+    100% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
+}
+
+.marquee-lined {
+    background-image: repeating-linear-gradient(180deg, black, black 1px, white 1px, white 25px);
+    padding: 1%;
+    margin: 3% 0;
+    border: black 5px solid;
+    color: black;
+    text-transform: uppercase;
+    font-family:robotoCondensedBold;
+}
+
+.prompt {
+    font-family:robotoCondensedBold;
+    margin: 2% 0;
+}
+
+.subtitle {
+    color: #D82B2B;
+}
+
+
+/* svgs */
+#left-curtain {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:200;
+}
+#right-curtain {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index:200;
+}
+#lever {
+    height: 50px;
+}
+#search-again {
+    position:fixed;
+    top:0;
+    right:200;
+    cursor: pointer;
+}
+
+.faded {
+    opacity: 0.5;
+    transition: opacity .5s
+}
+#search-again:hover .faded{
+    opacity: 1.0
+}
+#search-again:hover #lever{
+    transform: scaleX(-1);
+}
+
+header {
+    text-align: center;
+	position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background-color:#ff6666;
+    z-index: 100;
+
+    color: #b20000;
+}
+
+.header-content {
+    padding-top: 1%;
+}
+
+.input-container {
+    margin: 2% 20%;
+    font-family: robotoCondensedBold;
+}
+
+#down {
+	top:85vh;
+	size: 40px;
+	padding: 20px;
+    font-size: 2.5em;
+    text-align: center;
+}
+
+#down:hover {
+	cursor: pointer;
+	background-color: #eee;
+	opacity: 0.8;
+}
+
+
+.title {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.subheader {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#error-msg {
+    font-size: 30px;
+}
+
+#output-container {
+    text-align:center;
+}
+
+.output-list {
+    text-align: left;
+    display: inline-block;
+}
+#output-msg .marquee-lined {
+    margin: 10% 5% 0% 5%;
+}
+
+#query-row {
+    margin: 5% 2%;
+}
+
+/* materialize overrides */
+.row .col {
+    padding:0;
+}
+
+.input-field .autocomplete {
+    font-family: robotoCondensedBold;
+}
+
+#autocomplete-input {
+    font-size: 2em;
+    text-align:center;
+    border-bottom: 1px solid #F2CA20;
+    box-shadow: 0 1px 0 0 #F2CA20;
+}
+
+#search-btn {
+    background-color: #F2CA20;
+}
+
+.card {
+    box-shadow: 10px 10px #F2CA20;
+    transition: transform .2s ease-in-out, box-shadow .2s;
+}
+
+.card:hover {
+    box-shadow: 20px 20px #F2CA20;
+    transform: translate(-10px,-10px);
+}
+.card .card-content {
+    padding: 15px;
+    font-family:futuraLight;
+}
+
+.card .card-content .card-title {
+    line-height: normal;
+    font-size: 18px;
+    font-family:futuraMedium;
+}
+
+.card .invisible {
+    -webkit-box-shadow: 0; 
+    box-shadow: 0;
+}
