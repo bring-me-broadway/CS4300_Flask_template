@@ -31,13 +31,38 @@ body {
 
 /* OPENING PAGE STUFF */
 
+.marquee {
+    /* background-color: black; */
+    display: inline-block;
+    padding: 2%;
+    border-radius: 24px;
+    border: dotted 10px #F9FBA8;
+}
+
 .marquee h1 {
     font-family: futura, sans-serif;
     color: white;
-    /* text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white; */
     margin: 1%;
 }
 
+.marquee-lined {
+    background-image: repeating-linear-gradient(180deg, black, black 1px, white 1px, white 25px);
+    padding: 1%;
+    margin: 3% 0;
+    border: black 5px solid;
+    color: black;
+    text-transform: uppercase;
+    font-family:robotoCondensedBold;
+}
+
+.prompt {
+    font-family:robotoCondensedBold;
+    margin: 2% 0;
+}
+
+.subtitle {
+    color: #D82B2B;
+}
 #blink1 { animation: blink1 4s step-start 0s infinite; }
 @keyframes blink1 {
     10% { color: white; text-shadow: none; }
@@ -74,20 +99,6 @@ body {
     100% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
 }
 
-/* .blink {
-    color: white;
-    font-family:futura, sans-serif;
-    animation: blink 2s step-start 0s infinite;
-}
-@keyframes blink {
-    0% { color: white; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white; }
-    50% { color: white; text-shadow: none; }
-    100% { color: white; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white; }
-} */
-
-
-
-
 /* curtain svgs */
 #left-curtain {
     height: 100%;
@@ -103,10 +114,6 @@ body {
     top: 0;
     right: 0;
     z-index:200;
-}
-
-.prompt {
-    font-family:robotoCondensedBold;
 }
 
 header {
@@ -126,8 +133,13 @@ header {
     color: #b20000;
 }
 
+.header-content {
+    padding-top: 1%;
+}
+
 .input-container {
-    margin: 0 20%;
+    margin: 2% 20%;
+    font-family: robotoCondensedBold;
 }
 
 #down {
@@ -173,9 +185,24 @@ header {
 }
 
 
-/* materialize card overrides */
+/* materialize overrides */
 .row .col {
     padding:0;
+}
+
+.input-field .autocomplete {
+    font-family: robotoCondensedBold;
+}
+
+#autocomplete-input {
+    font-size: 2em;
+    text-align:center;
+    border-bottom: 1px solid #F2CA20;
+    box-shadow: 0 1px 0 0 #F2CA20;
+}
+
+#search-btn {
+    background-color: #F2CA20;
 }
 
 .card {

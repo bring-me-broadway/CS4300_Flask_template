@@ -19,39 +19,36 @@
         <img src="../static/images/leftcurtain.svg" id='left-curtain' alt="left curtain">
         <img src="../static/images/rightcurtain.svg" id='right-curtain' alt="right curtain">
         <header>
-            
-            <div class="marquee">
-                <h1><span class='blink' id='blink1'>BRING</span> <span class='blink' id='blink2'>ME</span></h1>
-                <h1><span class='blink' id='blink3'>BROADWAY</span></h1>
-            </div>
-            
-            <div class='input-container'>
-                <h3 class='prompt'>What broadway musical have you previously enjoyed?</h3>
-                <h6 class='prompt'>Not sure where to start? Try "Aladdin"</h6>
-
-                <!-- input -->
-                <div class="form-inline global-search">
-                    <!-- autocomplete MATERIALIZE -->
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <!-- <i class="material-icons prefix">textsms</i> -->
-                                    <input type="text" id="autocomplete-input" class="autocomplete">
-                                    <label for="autocomplete-input" class='white-text'>Musical Title</label>
+            <div class='header-content'>
+                <div class="marquee">
+                    <h1><span class='blink' id='blink1'>BRING</span> <span class='blink' id='blink2'>ME</span></h1>
+                    <h1><span class='blink' id='blink3'>BROADWAY</span></h1>
+                </div>
+                
+                <div class='input-container'>
+                    <div class='marquee-lined'>
+                        <h4 class='prompt'>What broadway musical have you previously enjoyed?</h4>
+                        <h5 class='prompt subtitle'>Not sure where to start? Try "Aladdin"</h5>
+                    </div>
+                    
+                    <!-- input -->
+                        <!-- autocomplete MATERIALIZE -->
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input type="text" id="autocomplete-input" class="autocomplete">
+                                        <label for="autocomplete-input" class='white-text'>Musical Title</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <a id='search-btn' class="waves-effect waves-light btn ">BRING IT!</a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <a id='search-btn' class="waves-effect waves-light btn ">BRING IT!</a>
-                            </div>
                         </div>
-                    </div>
+                    <!-- input end -->
                 </div>
-                <!-- input end -->
             </div>
-
-            <!-- <span id="down">&#8595;</span> -->
-
         </header>
         <!-- BODY CONTENT -->
         <div class='container' id='start'>
@@ -63,7 +60,11 @@
             <div id='output-container'>
                 <div id='results'>
                     <div id='output-msg'>
-                        <h4>Because you liked <i>{{query_title}}</i></h4>
+                        <div class='marquee-lined'>
+                            <h4>Because you liked <br>
+                                <i class='subtitle'>{{query_title}}</i>
+                            </h4>
+                        </div>
                         <!-- query card  -->
                         <div class="row">
                             <div class="col s5">
