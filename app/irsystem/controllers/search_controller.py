@@ -36,7 +36,7 @@ proper_names_list = [*proper_to_backend]
 # UNLEASH THE PICKLE
 pickle_in = open("broadway_lyrics_v5.pkl","rb")
 big_dict = pickle.load(pickle_in)
-	# print(big_dict['Phantom of the Opera, The'])
+print(big_dict['Phantom of the Opera, The'])
 	# keys: composer (str), img_name (str), currently_playing (bool)
 	# description (str), script (list)
 
@@ -71,17 +71,43 @@ def search():
 			for musical_name in data:
 				backend_name = proper_to_backend[musical_name]
 				info = big_dict[backend_name]
-				results_list.append(
-					{'name': musical_name, \
-					 'composer': info['composer'], \
-					 'img_name': info['img_name'], \
-					 'currently_playing': info['currently_playing']
-					})
+				# remove weird periods in composer str
+				composer_str = re.sub('<.*?>', '', info['composer'])
+
+				# if there is a ticket link:
+				if 'ticket_link' in info:
+					results_list.append(
+						{'name': musical_name, \
+						'description': info['show_score_description'], \
+						'show_score': info['show_score'], \
+						'composer': composer_str, \
+						'img_name': info['img_name'], \
+						'currently_playing': info['currently_playing'], \
+						'ticket_link': info['ticket_link']
+						})
+				else: 
+					# if there is NOT a ticket link:
+					results_list.append(
+						{'name': musical_name, \
+						'description': info['show_score_description'], \
+						'show_score': info['show_score'], \
+						'composer': composer_str, \
+						'img_name': info['img_name'], \
+						'currently_playing': info['currently_playing'], \
+						'ticket_link': False
+						})
 
 			# info for query
 			query_info = big_dict[query_backend]
-			query_data = {'name': query, 'composer': query_info['composer'], 'img_name': query_info['img_name'], \
-					 'currently_playing': query_info['currently_playing'] }
+			# remove weird periods in composer str
+			composer_str = re.sub('<.*?>', '', query_info['composer'])
+			query_data = {'name': query, 
+					 'description': query_info['show_score_description'], \
+					 'show_score': query_info['show_score'], \
+					 'composer': composer_str, \
+					 'img_name': query_info['img_name'], \
+					 'currently_playing': query_info['currently_playing'], \
+					 'ticket_link': query_info['ticket_link'] }
 
 	return render_template('search.html', \
 		name=project_name, netid=net_id, \

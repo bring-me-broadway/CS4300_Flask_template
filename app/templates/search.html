@@ -72,7 +72,14 @@
                                 </div>
                                 <div class="card-content col s6">
                                   <span class="card-title">{{query_data.name}}</span>
-                                  <p>Composed by {{query_data.composer}}</p>
+                                  <p>Rating: {{query_data.show_score}}</p>
+                                  <p>{{query_data.description}}</p>
+                                  {% if query_data.composer %}
+                                    <p>Composed by {{query_data.composer}}</p>
+                                  {% endif %}
+                                  {% if query_data.currently_playing %}
+                                    <p>Buy tickets for NYC show: {{query_data.ticket_link}}</p>
+                                  {% endif %}
                                 </div>
                               <!-- </div> -->
                             </div>
