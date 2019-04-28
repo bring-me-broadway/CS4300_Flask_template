@@ -36,9 +36,8 @@ proper_names_list = [*proper_to_backend]
 # UNLEASH THE PICKLE
 pickle_in = open("broadway_lyrics_v5.pkl","rb")
 big_dict = pickle.load(pickle_in)
-print(big_dict['Phantom of the Opera, The'])
-	# keys: composer (str), img_name (str), currently_playing (bool)
-	# description (str), script (list)
+# keys: composer (str), img_name (str), currently_playing (bool)
+# description (str), script (list)
 
 # data for javascript. key=name, val=img path
 search_data = {k : big_dict[v]['img_name'] for (k,v) in proper_to_backend.items()}
@@ -56,6 +55,8 @@ def search():
 		# convert from proper name to backend name
 		query_backend = proper_to_backend[query]
 
+		print(big_dict[query_backend])
+
 		if name_to_index[query_backend]:
 			# new ranker 
 			mus_idx = name_to_index[query_backend]
@@ -72,7 +73,8 @@ def search():
 				backend_name = proper_to_backend[musical_name]
 				info = big_dict[backend_name]
 				# remove weird periods in composer str
-				composer_str = re.sub('<.*?>', '', info['composer'])
+				composer_str = re.sub('[!@#$\.]', '', info['composer'])
+				print(composer_str)
 
 				# if there is a ticket link:
 				if 'ticket_link' in info:
@@ -94,20 +96,32 @@ def search():
 						'composer': composer_str, \
 						'img_name': info['img_name'], \
 						'currently_playing': info['currently_playing'], \
-						'ticket_link': False
+						'ticket_link': None
 						})
 
 			# info for query
 			query_info = big_dict[query_backend]
 			# remove weird periods in composer str
-			composer_str = re.sub('<.*?>', '', query_info['composer'])
-			query_data = {'name': query, 
-					 'description': query_info['show_score_description'], \
-					 'show_score': query_info['show_score'], \
-					 'composer': composer_str, \
-					 'img_name': query_info['img_name'], \
-					 'currently_playing': query_info['currently_playing'], \
-					 'ticket_link': query_info['ticket_link'] }
+			composer_str = re.sub('[!@#$\.]', '', query_info['composer'])
+			print(composer_str)
+
+			# if there is a ticket link:
+			if 'ticket_link' in query_info:
+				query_data = {'name': query, 
+					'description': query_info['show_score_description'], \
+					'show_score': query_info['show_score'], \
+					'composer': composer_str, \
+					'img_name': query_info['img_name'], \
+					'currently_playing': query_info['currently_playing'], \
+					'ticket_link': query_info['ticket_link'] }
+			else:
+				query_data = {'name': query, 
+					'description': query_info['show_score_description'], \
+					'show_score': query_info['show_score'], \
+					'composer': composer_str, \
+					'img_name': query_info['img_name'], \
+					'currently_playing': query_info['currently_playing'], \
+					'ticket_link': None }
 
 	return render_template('search.html', \
 		name=project_name, netid=net_id, \
