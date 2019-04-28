@@ -37,8 +37,8 @@
                             <div class="col s12">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input type="text" id="autocomplete-input" class="autocomplete">
-                                        <label for="autocomplete-input" class='white-text'>Musical Title</label>
+                                        <input type="text" id="autocomplete-input" class="autocomplete white-text">
+                                        <label for="autocomplete-input" class='black-text'>Musical Title</label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -52,35 +52,33 @@
         </header>
         <!-- BODY CONTENT -->
         <div class='container' id='start'>
-            
-
-            <!-- <h4>Or, let us <a id='search-btn' class="waves-effect waves-light btn">surprise</a>you</h4> -->
-        
+            <div id='search-again'>
+                <span class='roboto-caps faded'>search again</span>
+                <img src="../static/images/lever.svg" id='lever' alt="lever">
+            </div>
             <!-- output -->
             <div id='output-container'>
+
                 <div id='results'>
                     <div id='output-msg'>
-                        <div class='marquee-lined'>
-                            <h4>Because you liked <br>
-                                <i class='subtitle'>{{query_title}}</i>
-                            </h4>
-                        </div>
+                        <h3 class='roboto-caps marquee-lined'>Because you liked <br>
+                            <i class='subtitle'>{{query_title}}</i>
+                        </h3>
                         <!-- query card  -->
-                        <div class="row">
-                            <div class="col s5">
-                                <img class="activator" src="{{query_data.img_name}}" alt="{{query_data.name}}">
-                            </div>
-                            <div class="col s7">
-                              <div class="card grey lighten-5">
-                                <div class="card-content">
-                                  <span class="card-title">{{query_data.name}}</span>
-                                  <p>Composed by {{query_data.composer}}.</p>
+                        <div class="row" id='query-row'>
+                            <div class="card col s12">
+                                <div class="card-image waves-effect waves-block waves-light col s3">
+                                    <img class="activator" src="{{query_data.img_name}}" alt="{{query_data.name}}">
                                 </div>
-                              </div>
+                                <div class="card-content col s6">
+                                  <span class="card-title">{{query_data.name}}</span>
+                                  <p>Composed by {{query_data.composer}}</p>
+                                </div>
+                              <!-- </div> -->
                             </div>
                           </div>
                           <!-- end query card -->
-                        <h4>You might also like:</h4>
+                        <h4 class='roboto-caps'>You might also like:</h4>
                     </div>
                     {% for item in data_list_dicts %}
                         {% if loop.index0 % 3 == 0 %}
@@ -93,7 +91,7 @@
                                 </div>
                                 <div class="card-content">
                                     <span class="card-title activator grey-text text-darken-4">{{item.name}}</span>
-                                    <p>Composed by {{item.composer}}.</p>
+                                    <p>Composed by {{item.composer}}</p>
                                 </div>
                             </div>
                             <!-- MATERIALIZE END -->
@@ -107,30 +105,19 @@
             <!-- output end  -->
         </div>
 
-        <!-- toggle test -->
+        <!-- curtain controls -->
         <script>
         $("#search-btn").on("click", function () {
             $("header").slideUp(1000);
         });
-        </script>
 
-        <!-- toggle test end -->
-        <!-- tutorial  -->
-        <script type="text/javascript">
-            //scroll to top on page refresh (PART1)
-            window.onbeforeunload = function () {
-                window.scrollTo(0, 0);
-            }
-            //for arrow click part (PART2)
-            $(document).ready( function () {
-                $('#down').on('click',function () {
-                $("html").scrollTop(0);
-                $('html, body').animate({
-                    scrollTop: $('#start').offset().top
-                }, 1000);
-                });
-            });
-            </script>
+        $("#search-again").on("click", function () {
+            $("header").slideDown(1000);
+        });
+
+        </script>
+        <!-- curtain controls end -->
+ 
         <!-- steph -->
         <script type="text/javascript" language="javascript">
             var outputMessage = document.getElementById("output-msg");
@@ -154,7 +141,7 @@
 
                 if(query) {
                     $( document ).ajaxError(function( event, request, settings ) {
-                        $( "#output-container" ).html( "<p id='error-msg'>We couldn't find '" + decodeURIComponent(query) + "'... try again!</p>" );
+                        $( "#output-container" ).html( "<p id='error-msg' class='roboto-caps'>We couldn't find '" + decodeURIComponent(query) + "'... try again!</p>" );
                     });
                     // show output message
                     outputMessage.style.display = 'block';

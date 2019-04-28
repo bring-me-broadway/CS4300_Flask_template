@@ -1,5 +1,13 @@
 @font-face {
-    font-family: futura;
+    font-family: futuraLight;
+    src: url(../fonts/Futura-Light.ttf);
+}
+@font-face {
+    font-family: futuraMedium;
+    src: url(../fonts/Futura-Medium.ttf);
+}
+@font-face {
+    font-family: futuraHeavy;
     src: url(../fonts/Futura-Heavy.ttf);
 }
 @font-face {
@@ -20,13 +28,9 @@ body {
     background-color: #fffaf0;
 }
 
-.hidden {
-    display: none;
-}
-
-.global-search {
-    padding: 20px 0;
-    text-align:center;
+.roboto-caps {
+    text-transform: uppercase;
+    font-family:robotoCondensedBold;
 }
 
 /* OPENING PAGE STUFF */
@@ -38,31 +42,12 @@ body {
     border-radius: 24px;
     border: dotted 10px #F9FBA8;
 }
-
 .marquee h1 {
-    font-family: futura, sans-serif;
+    font-family: futuraHeavy, sans-serif;
     color: white;
     margin: 1%;
 }
 
-.marquee-lined {
-    background-image: repeating-linear-gradient(180deg, black, black 1px, white 1px, white 25px);
-    padding: 1%;
-    margin: 3% 0;
-    border: black 5px solid;
-    color: black;
-    text-transform: uppercase;
-    font-family:robotoCondensedBold;
-}
-
-.prompt {
-    font-family:robotoCondensedBold;
-    margin: 2% 0;
-}
-
-.subtitle {
-    color: #D82B2B;
-}
 #blink1 { animation: blink1 4s step-start 0s infinite; }
 @keyframes blink1 {
     10% { color: white; text-shadow: none; }
@@ -99,21 +84,60 @@ body {
     100% { color: inherit; text-shadow: 0px 0px 10px yellow, 0px 0px 10px orange, 0 0 5px white;}
 }
 
-/* curtain svgs */
+.marquee-lined {
+    background-image: repeating-linear-gradient(180deg, black, black 1px, white 1px, white 25px);
+    padding: 1%;
+    margin: 3% 0;
+    border: black 5px solid;
+    color: black;
+    text-transform: uppercase;
+    font-family:robotoCondensedBold;
+}
+
+.prompt {
+    font-family:robotoCondensedBold;
+    margin: 2% 0;
+}
+
+.subtitle {
+    color: #D82B2B;
+}
+
+
+/* svgs */
 #left-curtain {
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index:200;
 }
-
 #right-curtain {
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     z-index:200;
+}
+#lever {
+    height: 50px;
+}
+#search-again {
+    position:fixed;
+    top:0;
+    right:200;
+    cursor: pointer;
+}
+
+.faded {
+    opacity: 0.7;
+    transition: opacity .5s
+}
+#search-again:hover .faded{
+    opacity: 1.0
+}
+#search-again:hover #lever{
+    transform: scaleX(-1);
 }
 
 header {
@@ -150,7 +174,6 @@ header {
     text-align: center;
 }
 
-
 #down:hover {
 	cursor: pointer;
 	background-color: #eee;
@@ -169,7 +192,6 @@ header {
     text-transform: uppercase;
 }
 
-
 #error-msg {
     font-size: 30px;
 }
@@ -178,12 +200,17 @@ header {
     text-align:center;
 }
 
-
 .output-list {
     text-align: left;
     display: inline-block;
 }
+#output-msg .marquee-lined {
+    margin: 10% 5% 0% 5%;
+}
 
+#query-row {
+    margin: 5% 2%;
+}
 
 /* materialize overrides */
 .row .col {
@@ -206,24 +233,23 @@ header {
 }
 
 .card {
-    box-shadow: 10px 10px #2bd8d8;
+    box-shadow: 10px 10px #F2CA20;
     transition: transform .2s ease-in-out, box-shadow .2s;
 }
 
 .card:hover {
-    box-shadow: 20px 20px #2bd8d8;
+    box-shadow: 20px 20px #F2CA20;
     transform: translate(-10px,-10px);
 }
 .card .card-content {
     padding: 15px;
-}
-
-.card .card-title {
-    font-size: 18px;
+    font-family:futuraLight;
 }
 
 .card .card-content .card-title {
     line-height: normal;
+    font-size: 18px;
+    font-family:futuraMedium;
 }
 
 .card .invisible {
