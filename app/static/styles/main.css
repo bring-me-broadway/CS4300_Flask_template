@@ -28,9 +28,18 @@ body {
     background-color: #fffaf0;
 }
 
+p {
+    font-size: 16px;
+}
+
 .roboto-caps {
     text-transform: uppercase;
     font-family:robotoCondensedBold;
+}
+
+.futura-caps {
+    text-transform: uppercase;
+    font-family:futuraHeavy;
 }
 
 /* OPENING PAGE STUFF */
@@ -125,8 +134,9 @@ body {
 #search-again {
     position:fixed;
     top:0;
-    right:200;
+    right: 20%;
     cursor: pointer;
+    transition: top 0.3s;
 }
 
 .faded {
@@ -198,6 +208,8 @@ header {
 
 #output-container {
     text-align:center;
+    background-color: #fffaf0;
+    z-index: 100;
 }
 
 .output-list {
@@ -210,6 +222,23 @@ header {
 
 #query-row {
     margin: 5% 2%;
+}
+
+/* card styles */
+#query-card {
+    margin: 5%;
+}
+
+#query-card .card-content {
+    text-align: left;
+}
+
+.score {
+    vertical-align: super;
+}
+
+.composer {
+    font-style: italic;
 }
 
 /* materialize overrides */
@@ -238,21 +267,42 @@ header {
 }
 
 .card:hover {
-    box-shadow: 20px 20px #F2CA20;
-    transform: translate(-10px,-10px);
+    box-shadow: 15px 15px #F2CA20;
+    transform: translate(-5px,-5px);
 }
 .card .card-content {
     padding: 15px;
     font-family:futuraLight;
 }
 
+.card .card-content .composer {
+    margin-top: 2%;
+}
+
 .card .card-content .card-title {
     line-height: normal;
-    font-size: 18px;
+    font-size: 20px;
     font-family:futuraMedium;
 }
 
-.card .invisible {
-    -webkit-box-shadow: 0; 
-    box-shadow: 0;
+.modal {
+    max-height: 60%;
+    font-family: futuraMedium;
+    border: none;
+}
+
+.modal .horizontal .card-content {
+    text-align:left;
+}
+
+.modal .card {
+    box-shadow: none;
+    transition: none;
+}
+.modal .card:hover {
+    transform: none;
+}
+
+.modal-footer {
+    border-top: none;
 }

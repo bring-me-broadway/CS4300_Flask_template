@@ -3,11 +3,13 @@ from app.irsystem.models.helpers import *
 from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
 import re
 import pickle
+import json
+import numpy as np
 
 project_name = "BRING ME BROADWAY"
 net_id = "Nainika D'Souza (nmd65), Julie Phan (jp2254), Brooke Greenstein (bdg74), Arjun Chattoraj (ac2582), Stephanie Mark (srm276)"
 
-# ranker - updated 4/22
+# ranker - updated 4/29
 lyrsim = np.genfromtxt('sim_matrix.csv', delimiter=',') # lyrics similarity
 with open('name_to_index.json') as json_file:  
     name_to_index = json.load(json_file)
@@ -15,14 +17,17 @@ with open('index_to_name.json') as json_file:
     index_to_name = json.load(json_file)
 compsim = np.genfromtxt('composer_sim.csv', delimiter=',') # composer similarity
 descsim = np.genfromtxt('SVM_sim.csv', delimiter=',') # description similarity
+revsim = np.genfromtxt('review_sim.csv', delimiter=',') # description similarity
 
-w_lyr = 0.25
-w_comp = 0.20
-w_desc = 0.55
+w_lyr = 0.10
+w_comp = 0.10
+w_desc = 0.50
+w_rev = 0.30
 
 lyrsim_weighted = lyrsim*w_lyr
 compsim_weighted = compsim*w_comp
 descsim_weighted = descsim*w_desc
+revsim_weighted = revsim*w_rev
 
 # json of proper names ("Phantom of the Opera, The" --> "The Phantom of the Opera")
 with open('proper_to_backend.json') as json_file:  
@@ -58,23 +63,34 @@ def search():
 		print(big_dict[query_backend])
 
 		if name_to_index[query_backend]:
-			# new ranker 
+			# new ranker, updated 4/29
 			mus_idx = name_to_index[query_backend]
-			score_list = lyrsim_weighted[mus_idx] + compsim_weighted[mus_idx] + descsim_weighted[mus_idx]
+			score_list = lyrsim_weighted[mus_idx] + compsim_weighted[mus_idx] + descsim_weighted[mus_idx] + revsim_weighted[mus_idx]
 			sorted_i = np.argsort(score_list)[::-1]
-			mus_score_list = [ backend_to_proper[ index_to_name[str(i)] ] for i,score in enumerate(score_list)]
+
+			# tuple of proper name and similiarity dictionary
+			mus_score_list = [ 
+				( backend_to_proper[index_to_name[str(i)]], \
+					{	'overall_sim': round(score, 3), \
+						'lyric_sim': lyrsim_weighted[mus_idx][i], \
+						'composer_sim': compsim_weighted[mus_idx][i], \
+						'desc_sim': descsim_weighted[mus_idx][i],\
+						'review_sim': revsim_weighted[mus_idx][i] \
+					} 
+				) for i, score in enumerate(score_list) ]
 
 			data = np.array(mus_score_list)[sorted_i][1:13]
-
+			print(data)
+			# 
+			
 			# list of dictionaries
 			results_list = []
 
-			for musical_name in data:
+			for musical_name, musical_dict in data:
 				backend_name = proper_to_backend[musical_name]
 				info = big_dict[backend_name]
 				# remove weird periods in composer str
 				composer_str = re.sub('[!@#$\.]', '', info['composer'])
-				print(composer_str)
 
 				# if there is a ticket link:
 				if 'ticket_link' in info:
@@ -85,7 +101,8 @@ def search():
 						'composer': composer_str, \
 						'img_name': info['img_name'], \
 						'currently_playing': info['currently_playing'], \
-						'ticket_link': info['ticket_link']
+						'ticket_link': info['ticket_link'], \
+						'sim_dict': musical_dict
 						})
 				else: 
 					# if there is NOT a ticket link:
@@ -96,7 +113,8 @@ def search():
 						'composer': composer_str, \
 						'img_name': info['img_name'], \
 						'currently_playing': info['currently_playing'], \
-						'ticket_link': None
+						'ticket_link': None, \
+						'sim_dict': musical_dict
 						})
 
 			# info for query
