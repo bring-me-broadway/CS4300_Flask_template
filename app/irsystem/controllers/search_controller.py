@@ -64,8 +64,6 @@ def search():
 		# convert from proper name to backend name
 		query_backend = proper_to_backend[query]
 
-		# print(big_dict[query_backend])
-
 		if name_to_index[query_backend]:
 			# new ranker, updated 4/29
 			mus_idx = name_to_index[query_backend]
@@ -84,7 +82,6 @@ def search():
 				) for i, score in enumerate(score_list) ]
 
 			data = np.array(mus_score_list)[sorted_i][1:13]
-			# print(data)
 			# 
 			
 			# list of dictionaries
@@ -127,7 +124,6 @@ def search():
 			query_info = big_dict[query_backend]
 			# remove weird periods in composer str
 			composer_str = re.sub('[!@#$\.]', '', query_info['composer'])
-			print(composer_str)
 
 			# if there is a ticket link:
 			if 'ticket_link' in query_info:

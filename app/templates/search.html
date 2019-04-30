@@ -74,12 +74,14 @@
                             <div class="card-stacked">
                                 <div class="card-content">
                                     <span class="card-title">{{query_data.name}}</span>
+                                    {% if query_data.show_score != 'Not Available' %}
                                     <p>
                                         <i class="material-icons">star</i>
                                         <span class='score'>
                                             {{query_data.show_score}}%   
                                         </span>
                                     </p>
+                                    {% endif %}
 
                                     {% if query_data.adj_list %}
                                     <div class='adjs'>
@@ -170,23 +172,33 @@
 
                                             <div class='sim-breakdown'>
                                                 <p class="card-title">Overall query similarity: {{item.sim_dict.overall_sim}}</p>
+
+                                                {% if item.sim_dict.lyric_sim > 0.1 %}
                                                 <p>
                                                     <i class="material-icons">music_note</i>
                                                     <span>Lyric similarity: {{item.sim_dict.lyric_sim}}</span>
                                                 </p>
+                                                {% endif %}
+                                                {% if item.sim_dict.composer_sim > 0 %}
                                                 <p>
                                                     <i class="material-icons">person</i>
                                                     <span>Composer similarity: {{item.sim_dict.composer_sim}}</span>
                                                 </p>
+                                                {% endif %}
+                                                {% if item.sim_dict.desc_sim > 0 %}
                                                 <p>
                                                     <i class="material-icons">format_align_left</i>
                                                     <span>Description similarity: {{item.sim_dict.desc_sim}}</span>
                                                 </p>
+                                                {% endif %}
+                                                {% if item.sim_dict.review_sim > 0 %}
                                                 <p>
                                                     <i class="material-icons">stars</i>
                                                     <span>
-                                                        Review similarity: {{item.sim_dict.review_sim}}</p>
+                                                        Review similarity: {{item.sim_dict.review_sim}}
                                                     </span>
+                                                </p>
+                                                {% endif %}
                                                     
                                             </div>
                                         </div>
@@ -244,7 +256,6 @@
 
             // materialize autocomplete
             $(document).ready(function(){
-                // console.log(dataDict);
                 $('input.autocomplete').autocomplete({
                     data: dataDict
                 });
@@ -252,9 +263,7 @@
             // materialize end
 
             $('#search-btn').click(function(){
-                // console.log('clicked');
                 query = document.getElementById('autocomplete-input').value;
-                // console.log('query');
 
                 if(query) {
                     $( document ).ajaxError(function( event, request, settings ) {
@@ -264,7 +273,6 @@
                     outputMessage.style.display = 'block';
 
                     query = encodeURIComponent(query.trim())
-                    // console.log(query)
                     let url = window.location.href + '?search=' + query;
                     
                     $('#output-container').load(url + ' #results');
@@ -281,7 +289,6 @@
             var prevScrollpos = window.pageYOffset;
             window.onscroll = function() {
                 var currentScrollPos = window.pageYOffset;
-                // console.log(currentScrollPos);
                 if (prevScrollpos > currentScrollPos) {
                     document.getElementById("search-again").style.top = "0";
                     
@@ -289,10 +296,8 @@
                     document.getElementById("search-again").style.top = "-50px";
                 }
                 
-                // console.log(currentScrollPos);
                 if (currentScrollPos > 60) {
                     $("#search-again").css( "display", "none" );
-                    // console.log('lever hidden')
                 } else {
                     $("#search-again").fadeIn().css( "display", "inline-block" );
                 }
@@ -301,12 +306,9 @@
         });
 
         function openModal(idString) {
-            console.log('openModal()')
             $("#" + idString).fadeIn().css({ display: "table" });
-            console.log('opened')
         }
         function closeModal(idString) {
-            console.log('closeModal()')
             $("#" + idString).fadeOut('slow').css({ display: "table" });
         }
         </script>
