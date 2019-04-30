@@ -35,6 +35,10 @@ with open('proper_to_backend.json') as json_file:
 with open('backend_to_proper.json') as json_file:  
     backend_to_proper = json.load(json_file)
 
+#json of adjectives
+with open('adjs.json') as json_file:  
+    adj_dict = json.load(json_file)
+
 # list of proper names for display
 proper_names_list = [*proper_to_backend]
 
@@ -102,7 +106,8 @@ def search():
 						'img_name': info['img_name'], \
 						'currently_playing': info['currently_playing'], \
 						'ticket_link': info['ticket_link'], \
-						'sim_dict': musical_dict
+						'sim_dict': musical_dict, \
+						'adj_list': adj_dict[backend_name]
 						})
 				else: 
 					# if there is NOT a ticket link:
@@ -114,7 +119,8 @@ def search():
 						'img_name': info['img_name'], \
 						'currently_playing': info['currently_playing'], \
 						'ticket_link': None, \
-						'sim_dict': musical_dict
+						'sim_dict': musical_dict, \
+						'adj_list': adj_dict[backend_name]
 						})
 
 			# info for query
@@ -131,7 +137,8 @@ def search():
 					'composer': composer_str, \
 					'img_name': query_info['img_name'], \
 					'currently_playing': query_info['currently_playing'], \
-					'ticket_link': query_info['ticket_link'] }
+					'ticket_link': query_info['ticket_link'], \
+					'adj_list': adj_dict[query_backend] }
 			else:
 				query_data = {'name': query, 
 					'description': query_info['show_score_description'], \
@@ -139,7 +146,8 @@ def search():
 					'composer': composer_str, \
 					'img_name': query_info['img_name'], \
 					'currently_playing': query_info['currently_playing'], \
-					'ticket_link': None }
+					'ticket_link': None, \
+					'adj_list': adj_dict[query_backend] }
 
 	return render_template('search.html', \
 		name=project_name, netid=net_id, \

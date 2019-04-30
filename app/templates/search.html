@@ -80,15 +80,29 @@
                                             {{query_data.show_score}}%   
                                         </span>
                                     </p>
-                                    <p class='description'>{{query_data.description}}</p>
 
+                                    {% if query_data.adj_list %}
+                                    <div class='adjs'>
+                                        {% for word in query_data.adj_list %}
+                                        <span class='adj'>"{{ word }}" </span>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if query_data.description != 'Not Available' %}
+                                    <p class='description'>{{query_data.description}}</p>
+                                    {% endif %}
                                     {% if query_data.composer %}
                                     <p class='composer'>Composed by {{query_data.composer}}</p>
                                     {% endif %}
                                 </div>
                                 {% if query_data.currently_playing %}
                                 <div class="card-action">
-                                    <a href="{{query_data.ticket_link}}" target="_blank" class='futura-caps'>Buy NYC Show Tickets</a>
+                                    <a href="{{query_data.ticket_link}}" target="_blank" class='futura-caps'>
+                                        <span class='align'>Buy NYC Show Tickets</span>
+                                        <i class="material-icons">confirmation_number</i>
+                                    </a>
+                                    
                                 </div>  
                                 {% endif %}
                             </div>
@@ -128,13 +142,27 @@
                                     <div class="card-stacked">
                                         <div class="card-content">
                                             <span class="card-title">{{item.name}}</span>
+                                            
+                                            {% if item.show_score != 'Not Available' %}
                                             <p>
                                                 <i class="material-icons">star</i>
                                                 <span class='score'>
                                                     {{item.show_score}}%
                                                 </span>
                                             </p>
+                                            {% endif %}
+
+                                            {% if item.adj_list %}
+                                            <div class='adjs'>
+                                                {% for word in item.adj_list %}
+                                                <span class='align'>"{{ word }}" </span>
+                                                {% endfor %}
+                                            </div>
+                                            {% endif %}
+
+                                            {% if item.description != 'Not Available' %}
                                             <p class='description'>{{item.description}}</p>
+                                            {% endif %}
         
                                             {% if item.composer %}
                                             <p class='composer'>Composed by {{item.composer}}</p>
@@ -151,7 +179,7 @@
                                                     <span>Composer similarity: {{item.sim_dict.composer_sim}}</span>
                                                 </p>
                                                 <p>
-                                                    <i class="material-icons">textsms</i>
+                                                    <i class="material-icons">format_align_left</i>
                                                     <span>Description similarity: {{item.sim_dict.desc_sim}}</span>
                                                 </p>
                                                 <p>

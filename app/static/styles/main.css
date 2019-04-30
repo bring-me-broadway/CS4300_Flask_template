@@ -330,3 +330,17 @@ header {
     text-decoration: none;
     color: #F2CA20;
 }
+
+.adjs {
+    margin: 1% 0;
+    font-family: futuraMedium;
+    font-size: 16px;
+}
+
+.align {
+    vertical-align: super;
+}
+
+.card-action a:hover {
+    text-decoration: none;
+}
