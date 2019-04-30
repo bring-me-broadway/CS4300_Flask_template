@@ -60,7 +60,7 @@ def search():
 		# convert from proper name to backend name
 		query_backend = proper_to_backend[query]
 
-		print(big_dict[query_backend])
+		# print(big_dict[query_backend])
 
 		if name_to_index[query_backend]:
 			# new ranker, updated 4/29
@@ -72,15 +72,15 @@ def search():
 			mus_score_list = [ 
 				( backend_to_proper[index_to_name[str(i)]], \
 					{	'overall_sim': round(score, 3), \
-						'lyric_sim': lyrsim_weighted[mus_idx][i], \
-						'composer_sim': compsim_weighted[mus_idx][i], \
-						'desc_sim': descsim_weighted[mus_idx][i],\
-						'review_sim': revsim_weighted[mus_idx][i] \
+						'lyric_sim': round(lyrsim_weighted[mus_idx][i], 3), \
+						'composer_sim': round(compsim_weighted[mus_idx][i], 3), \
+						'desc_sim': round(descsim_weighted[mus_idx][i], 3),\
+						'review_sim': round(revsim_weighted[mus_idx][i], 3) \
 					} 
 				) for i, score in enumerate(score_list) ]
 
 			data = np.array(mus_score_list)[sorted_i][1:13]
-			print(data)
+			# print(data)
 			# 
 			
 			# list of dictionaries

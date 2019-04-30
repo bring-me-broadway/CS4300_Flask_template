@@ -281,12 +281,13 @@ header {
 
 .card .card-content .card-title {
     line-height: normal;
-    font-size: 20px;
+    font-size: 22px;
     font-family:futuraMedium;
 }
 
 .modal {
     max-height: 60%;
+    max-width: 70%;
     font-family: futuraMedium;
     border: none;
 }
@@ -305,4 +306,27 @@ header {
 
 .modal-footer {
     border-top: none;
+}
+
+.modal-footer span {
+    vertical-align: top;
+}
+
+/* sim breakdown */
+.sim-breakdown {
+    margin-top: 3%;
+    padding: 3% 0;
+    border-top: 1px #F2CA20 solid;
+}
+.sim-breakdown span {
+    vertical-align: super;
+}
+
+.card .card-content .sim-breakdown .card-title {
+    font-size: 18px;
+}
+
+.modal-close:hover {
+    text-decoration: none;
+    color: #F2CA20;
 }

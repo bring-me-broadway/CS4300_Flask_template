@@ -77,7 +77,7 @@
                                     <p>
                                         <i class="material-icons">star</i>
                                         <span class='score'>
-                                            {{query_data.show_score}}%
+                                            {{query_data.show_score}}%   
                                         </span>
                                     </p>
                                     <p class='description'>{{query_data.description}}</p>
@@ -116,7 +116,7 @@
                                             </span>
                                     </p>
                                     {% endif %}
-                                    <p>Similarity to query: {{item.sim_dict.overall_sim}}</p>
+                                    <p>Query similarity: {{item.sim_dict.overall_sim}}</p>
                                 </div>
                             </div>
                             <!-- modals -->
@@ -139,6 +139,28 @@
                                             {% if item.composer %}
                                             <p class='composer'>Composed by {{item.composer}}</p>
                                             {% endif %}
+
+                                            <div class='sim-breakdown'>
+                                                <p class="card-title">Overall query similarity: {{item.sim_dict.overall_sim}}</p>
+                                                <p>
+                                                    <i class="material-icons">music_note</i>
+                                                    <span>Lyric similarity: {{item.sim_dict.lyric_sim}}</span>
+                                                </p>
+                                                <p>
+                                                    <i class="material-icons">person</i>
+                                                    <span>Composer similarity: {{item.sim_dict.composer_sim}}</span>
+                                                </p>
+                                                <p>
+                                                    <i class="material-icons">textsms</i>
+                                                    <span>Description similarity: {{item.sim_dict.desc_sim}}</span>
+                                                </p>
+                                                <p>
+                                                    <i class="material-icons">stars</i>
+                                                    <span>
+                                                        Review similarity: {{item.sim_dict.review_sim}}</p>
+                                                    </span>
+                                                    
+                                            </div>
                                         </div>
                                         {% if item.currently_playing %}
                                         <div class="card-action">
@@ -148,8 +170,9 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <a class="modal-close waves-effect waves-yellow btn-flat" onClick="closeModal('modal-{{loop.index}}')"> CLOSE
+                                    <a class="modal-close waves-effect waves-yellow btn-flat" onClick="closeModal('modal-{{loop.index}}')">
                                         <i class="material-icons">close</i>
+                                    <span>CLOSE</span>
                                     </a>
                                 </div>
                             </div>
@@ -166,13 +189,7 @@
             <!-- output end  -->
         </div>
 
-        <!-- ### SCRIPTS START ### -->
-        <script>
-            $(document).ready(function(){
-                $('.tooltipped').tooltip();
-            });
-        </script>
-        
+        <!-- ### SCRIPTS START ### -->        
 
         <!-- curtain controls -->
         <script>
