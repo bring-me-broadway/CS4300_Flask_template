@@ -204,6 +204,7 @@ header {
 
 #error-msg {
     font-size: 30px;
+    margin: 15%;
 }
 
 #output-container {
